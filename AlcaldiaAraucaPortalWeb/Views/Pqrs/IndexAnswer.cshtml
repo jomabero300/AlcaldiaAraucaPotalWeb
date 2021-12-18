@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Pqrs>
+
+@{
+    ViewData["Title"] = "IndexAnswer";
+}
+
+<h1>P.Q.R.S</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PqrsDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PqrsMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PqrsCategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PqrsDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PqrsMessage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PqrsCategory.PqrsCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State.StateName)
+            </td>
+            <td>
+                <a asp-action="Answer" asp-route-id="@item.PqrsId">Respuesta</a> |
+                <a asp-action="transfer" asp-route-id="@item.PqrsId">Traslado</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

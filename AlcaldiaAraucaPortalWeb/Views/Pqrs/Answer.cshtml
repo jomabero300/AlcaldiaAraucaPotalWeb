@@ -1,0 +1,59 @@
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewGene.PqrsAnswerViewModelGene
+
+@{
+    ViewData["Title"] = "Respuesta";
+}
+
+<h1>Respuesta</h1>
+
+<h4>P.Q.R.S</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Answer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PqrsId" />
+
+
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-contro" disabled />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PqrsCategoryName" class="control-label"></label>
+                <input asp-for="PqrsCategoryName" class="form-contro" disabled />
+                <span asp-validation-for="PqrsCategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PqrsDate" class="control-label"></label>
+                <input asp-for="PqrsDate" class="form-contro" disabled />
+                <span asp-validation-for="PqrsDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PqrsMessage" class="control-label"></label>
+                <input asp-for="PqrsMessage" class="form-contro" disabled />
+                <span asp-validation-for="PqrsMessage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PqrsAnswer" class="control-label"></label>
+                <input asp-for="PqrsAnswer" class="form-contro" />
+                <span asp-validation-for="PqrsAnswer" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary">Responder</button> |
+                <a asp-action="IndexAnswer" class="btn btn-sm btn-success">Retornar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

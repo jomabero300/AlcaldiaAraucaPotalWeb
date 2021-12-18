@@ -1,0 +1,48 @@
+﻿@model AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsTraceability
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PqrsTraceability</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PqrsTraceabilityDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PqrsTraceabilityDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PqrsUserStrategicLine.PqrsStrategicLine)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PqrsUserStrategicLine.PqrsStrategicLine.PqrsStrategicLineName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pqrs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pqrs.PqrsMessage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PqrsUserStrategicLine)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PqrsUserStrategicLine.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PqrsTraceabilityId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

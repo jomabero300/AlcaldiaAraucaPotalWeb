@@ -1,0 +1,73 @@
+﻿@model AlcaldiaAraucaPortalWeb.Data.Entities.Acti.Briefcase
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Briefcase</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BriefcaseTitel" class="control-label"></label>
+                <input asp-for="BriefcaseTitel" class="form-control" />
+                <span asp-validation-for="BriefcaseTitel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseImage" class="control-label"></label>
+                <input asp-for="BriefcaseImage" class="form-control" />
+                <span asp-validation-for="BriefcaseImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseText" class="control-label"></label>
+                <input asp-for="BriefcaseText" class="form-control" />
+                <span asp-validation-for="BriefcaseText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseUrl" class="control-label"></label>
+                <input asp-for="BriefcaseUrl" class="form-control" />
+                <span asp-validation-for="BriefcaseUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseDescrption" class="control-label"></label>
+                <input asp-for="BriefcaseDescrption" class="form-control" />
+                <span asp-validation-for="BriefcaseDescrption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseFacebook" class="control-label"></label>
+                <input asp-for="BriefcaseFacebook" class="form-control" />
+                <span asp-validation-for="BriefcaseFacebook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseTwitter" class="control-label"></label>
+                <input asp-for="BriefcaseTwitter" class="form-control" />
+                <span asp-validation-for="BriefcaseTwitter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseSkype" class="control-label"></label>
+                <input asp-for="BriefcaseSkype" class="form-control" />
+                <span asp-validation-for="BriefcaseSkype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefcaseGoogle" class="control-label"></label>
+                <input asp-for="BriefcaseGoogle" class="form-control" />
+                <span asp-validation-for="BriefcaseGoogle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

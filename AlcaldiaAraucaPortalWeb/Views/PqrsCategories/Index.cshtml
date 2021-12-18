@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsCategory>
+
+@{
+    ViewData["Title"] = "Categorias PQRS";
+}
+
+<div class="row" style="width:100%;">
+    <di class="col-md-6">
+        <h1>CategorÍas P.Q.R.S</h1>
+    </di>
+    <di class="col-md-4 text-right">
+        <a asp-action="Create" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-fill"></i> Nuevo</a>
+    </di>
+</div>
+
+<table id="MyTable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PqrsCategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PqrsCategoryName)
+                </td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@item.PqrsCategoryId" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i> Edita</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PqrsCategoryId" class="btn btn-sm btn-success"><i class="bi bi-trash2-fill"></i> Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#MyTable').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}

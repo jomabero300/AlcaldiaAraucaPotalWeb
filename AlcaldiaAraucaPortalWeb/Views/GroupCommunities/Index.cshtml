@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AlcaldiaAraucaPortalWeb.Data.Entities.Proc.GroupCommunity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row" style="width:100%;">
+    <di class="col-md-6">
+        <h1>Grupo comunitarios</h1>
+    </di>
+    <di class="col-md-4 text-right">
+        <a asp-action="Create" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-fill"></i> Nuevo</a>
+    </di>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupCommunityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupCommunityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State.StateName)
+                </td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@item.GroupCommunityId" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i> Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.GroupCommunityId" class="btn btn-sm btn-info"><i class="bi bi-eye-fill"></i> Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.GroupCommunityId" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

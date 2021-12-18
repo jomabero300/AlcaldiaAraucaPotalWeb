@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsUserStrategicLine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row" style="width:100%;">
+    <di class="col-md-6">
+        <h2>Usuarios y lineas estrategicas</h2>
+    </di>
+    <di class="col-md-4 text-right">
+        <a asp-action="Create" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-fill"></i> Nuevo</a>
+    </di>
+</div>
+
+<table id="MyTable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PqrsStrategicLineId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PqrsStrategicLine.PqrsStrategicLineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State.StateName)
+                </td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@item.PqrsUserStrategicLineId" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i>Editar</a> |
+                    <a onclick="deleteSwal(@item.PqrsUserStrategicLineId)" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script src="~/js/PqrsUserStrategicLineSwal.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#MyTable').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}
