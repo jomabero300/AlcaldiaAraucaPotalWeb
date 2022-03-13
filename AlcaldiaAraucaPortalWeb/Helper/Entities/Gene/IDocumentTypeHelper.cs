@@ -1,8 +1,6 @@
 ﻿using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
@@ -14,6 +12,5 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         Task<List<DocumentType>> ComboAsync();
         Task<Response> DeleteAsync(int id);
         Task<List<DocumentType>> ListAsync();
-
     }
 }

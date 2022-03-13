@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d780683f-4c52-4ef7-90c5-1e7989333fb4": {
+      "ProjectGuid": "d780683f-4c52-4ef7-90c5-1e7989333fb4",
+      "DisplayName": "AlcaldiaAraucaPortalReport",
+      "ColorIndex": 0
+    },
+    "75da880f-aa3f-4030-9dd9-0e1c67666991": {
+      "ProjectGuid": "75da880f-aa3f-4030-9dd9-0e1c67666991",
+      "DisplayName": "AlcaldiaAraucaPortalWeb",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

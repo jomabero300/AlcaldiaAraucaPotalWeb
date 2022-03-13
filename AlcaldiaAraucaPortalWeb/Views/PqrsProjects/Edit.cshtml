@@ -1,0 +1,303 @@
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewGene.PqrsProjectViewModelsGene
+
+@{
+    ViewData["Title"] = "Propuesta";
+}
+
+<hr />
+<form asp-action="Edit">
+    <div class="row" style="width:100%;">
+        <div class="col-md-6">
+            <h4>Editar propuesta detallada</h4>
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i>Guardar</button> |
+                <a asp-action="Index" class="btn btn-sm btn-success"><i class="bi bi-chevron-double-left"></i>Retornar</a>
+            </div>
+
+        </div>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="RegistrationDate" />
+    <input type="hidden" asp-for="StateId" />
+    <input type="hidden" id="pqrsProjectId" asp-for="PqrsProjectId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="RegistrationDate" class="control-label"></label>
+                        <input type="date" asp-for="RegistrationDate" class="form-control" disabled />
+                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="PqrsStrategicLineId" class="control-label"></label>
+                        <select asp-for="PqrsStrategicLineId" class="form-control" asp-items="ViewBag.PqrsStrategicLineId" disabled></select>
+                        <span asp-validation-for="PqrsStrategicLineId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Object" class="control-label"></label>
+                        <input asp-for="Object" class="form-control" />
+                        <span asp-validation-for="Object" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container d-flex justify-content-center">
+                        <div class="col-md-12 border shadow">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item"><a href="#Activities-tab" class="nav-link" data-toggle="pill">Actividades</a></li>
+                                <li class="nav-item"><a href="#Proponets-tab" class="nav-link" data-toggle="pill">Propononte</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <!--Actividades-->
+                                <div class="tab-pane show fade active justify-content-center p-2" id="Activities-tab">
+                                    <div class="row" style="width:100%;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().Description" class="control-label"></label>
+                                                <input id="description" maxlength="90" class="form-control" />
+                                                <span id="spanDescription" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().Budget" class="control-label"></label>
+                                                <input id="budget" maxlength="10" class="form-control" />
+                                                <span id="spanBudget" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().DateStart" class="control-label"></label>
+                                                <input id="dateStart" type="date" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().DateEnd" class="control-label"></label>
+                                                <input id="dateEnd" type="date" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 text-right align-self-center">
+                                            <div class="form-group">
+                                                @*<a onclick="deleteSwal(@item.PqrsProjectActivitieId)" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</a>*@
+                                                <button onclick="ActivitiesAdd()" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-fill"></i> Agregar</button>
+                                                @*<button type="button" id="btnActivitiesAdd" onclick="ActivitiesAdd();" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i> Agregar</button>*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div id="divActivities">
+                                            <table class="table" id="myTableActivities">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Presupuesto</th>
+                                                        <th>Fecha Inicio</th>
+                                                        <th>Fecha Final</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.PqrsProjectActivities)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Description)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Budget)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DateStart)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DateEnd)
+                                                            </td>
+                                                            <td align="center">
+                                                                <button onclick="deleteSwal(@item.PqrsProjectActivitieId)" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Proponentes-->
+                                <div class="tab-pane justify-content-center p-2" id="Proponets-tab">
+                                    <div class="row" style="width:100%;">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 text-right align-self-center">
+                                            <div class="form-group">
+                                                <button type="button" id="btnProponentsAdd" onclick="ProponentsAdd();" class="btn btn-sm btn-primary">Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div id="divProponents">
+                                            <table class="table" id="myTableProponents">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Nombre</th>
+                                                        <th>Teléfono</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.PqrsProjectProponents)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Email)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Phone)
+                                                            </td>
+                                                            <td align="center">
+                                                                <a asp-action="Delete" asp-route-id="@item.PqrsProponentId" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function deleteSwal(pqrsProjectActivitieId) {
+            swal({
+                title: 'Esta usted seguro!',
+                text: 'que quieres borrar esto?',
+                icon: 'warning',
+                buttons: ['No', 'Si'],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Pqrsprojects/PqrsProjectActivityDelete/",
+                        data: { id: pqrsProjectActivitieId },
+                        success: function (response) {
+
+                            if (response.status == true) {
+                                $("#myModalDelete").modal('hide');
+                                swal({ title: "Delete!", text: "Delete Successfuly", icon: "success", button: false, timer: 2500 }).then((value) => {
+                                    window.location.href = "/Pqrsprojects/Edit/?id=" + response.pqrsProjectId;
+                                });
+                            } else {
+                                $("#myModalDelete").modal('hide');
+                                swal({ title: "Error", text: response.message, icon: "error", button: "Aceptar" }).then((value) => {
+                                    window.location.href = "/PqrsProjects/Index";
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function ActivitiesAdd() {
+            if (ActivitiesValidate()) {
+                var $model = {
+                    PqrsProjectActivitieId:0,
+                    PqrsProjectId: $('#pqrsProjectId').val(),
+                    Description: $('#description').val(),
+                    Budget: $('#budget').val(),
+                    DateStart: $('#dateStart').val(),
+                    DateEnd: $('#dateEnd').val()
+                };
+
+                let id = $('#pqrsProjectId').val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "/Pqrsprojects/PqrsProjectActivityEditAdd",
+                    data: $model,
+                    success: function (data) {
+                        alert(data.pqrsProjectId);
+                        window.location.href = "/Pqrsprojects/Edit/?id=" + data.pqrsProjectId;
+                    },
+                    error: function (ex) {
+                        alert(ex.responseText);
+                        window.location.href = "/PqrsProjects/Index";
+                    }
+                });
+            }
+            return false;
+        }
+
+        function ActivitiesValidate() {
+            var isValid = true;
+            $('#spanDescription').text('').show('hide');
+            $('#spanBudget').text('').show('hide');
+
+            if ($('#description').val().trim() == "") {
+
+                $('#spanDescription').text('!El campo es requerido¡').show();
+
+                if (isValid) {
+                    $('#description').focus();
+                }
+
+                isValid = false;
+            }
+
+            if ($('#budget').val().trim() == "") {
+
+                $('#spanBudget').text('!El campo es requerido¡').show();
+
+                if (isValid) {
+                    $('#budget').focus();
+                }
+
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+}

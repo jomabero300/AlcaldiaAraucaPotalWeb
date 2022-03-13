@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlcaldiaAraucaPortalWeb.Data.Entities.Acti
 {
     [Table("Briefcases", Schema = "Acti")]
-    public class Briefcase
+    public class Briefcase //Portafolio
     {
         [Key]
         public int BriefcaseId { get; set; }
@@ -36,31 +37,9 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Acti
         [Column(TypeName = "varchar(200)")]
         [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Introduccion")]
+        [Display(Name = "Descripción")]
         public string BriefcaseDescrption { get; set; }
 
-        [Column(TypeName = "varchar(200)")]
-        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Facebbok")]
-        public string BriefcaseFacebook { get; set; }
-
-        [Column(TypeName = "varchar(200)")]
-        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Twitter")]
-        public string BriefcaseTwitter { get; set; }
-
-        [Column(TypeName = "varchar(200)")]
-        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Skype")]
-        public string BriefcaseSkype { get; set; }
-
-        [Column(TypeName = "varchar(200)")]
-        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Google")]
-        public string BriefcaseGoogle { get; set; }
+        public virtual ICollection<BriefcaseSocialNetwork> BriefcaseSocialNetworks { get; set; } = new List<BriefcaseSocialNetwork>();
     }
 }

@@ -15,8 +15,6 @@ namespace AlcaldiaAraucaPortalWeb
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
-
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
@@ -26,7 +24,6 @@ namespace AlcaldiaAraucaPortalWeb
                 {
                     var identityContext = services.GetRequiredService<ApplicationDbContext>();
                     SeedDb.Seed(identityContext, services).Wait();
-                    //var context = services.GetRequiredService<MedicalOfficeContext>();
                 }
                 catch (Exception ex)
                 {

@@ -52,9 +52,5 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
             return View(rol);
         }
 
-
-
-
-
     }
 }

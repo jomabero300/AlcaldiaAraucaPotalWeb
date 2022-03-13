@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlcaldiaAraucaPortalWeb", "AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb.csproj", "{75DA880F-AA3F-4030-9DD9-0E1C67666991}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlcaldiaAraucaPortalReport", "AlcaldiaAraucaPortalReport\AlcaldiaAraucaPortalReport.csproj", "{D780683F-4C52-4EF7-90C5-1E7989333FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcaldiaAraucaPortalCommon", "AlcaldiaAraucaPortalCommon\AlcaldiaAraucaPortalCommon.csproj", "{58E6CDDB-A74E-419D-AF47-BEAC5FDF473D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{75DA880F-AA3F-4030-9DD9-0E1C67666991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75DA880F-AA3F-4030-9DD9-0E1C67666991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75DA880F-AA3F-4030-9DD9-0E1C67666991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D780683F-4C52-4EF7-90C5-1E7989333FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D780683F-4C52-4EF7-90C5-1E7989333FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D780683F-4C52-4EF7-90C5-1E7989333FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D780683F-4C52-4EF7-90C5-1E7989333FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E6CDDB-A74E-419D-AF47-BEAC5FDF473D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E6CDDB-A74E-419D-AF47-BEAC5FDF473D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E6CDDB-A74E-419D-AF47-BEAC5FDF473D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E6CDDB-A74E-419D-AF47-BEAC5FDF473D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

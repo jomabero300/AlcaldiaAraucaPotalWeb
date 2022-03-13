@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Admi;
 
 namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
 {
@@ -19,11 +20,15 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IMailHelper _mailHelper;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, 
+            IEmailSender emailSender, 
+            IMailHelper mailHelper)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _mailHelper = mailHelper;
         }
 
         [BindProperty]
@@ -33,6 +38,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "Correo electrónico")]
             public string Email { get; set; }
         }
 
@@ -57,10 +63,16 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                var response = _mailHelper.SendMail(
+                                Input.Email,
+                                "Restablecer la contraseña", 
+                                $"Por favor restablezca su contraseña en este enlace <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> haciendo clic aquí</a>.");
+
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

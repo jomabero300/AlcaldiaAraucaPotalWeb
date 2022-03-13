@@ -20,6 +20,7 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Gene
         [Range(minimum: 1, maximum: double.MaxValue, ErrorMessage = "Usted debe seleccionar una {0}")]
         [Display(Name = "Estado")]
         public int StateId { get; set; }
+
         public virtual State State { get; set; }
     }
 }

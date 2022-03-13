@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $("#UserId").change(function () {
-        console.log($("#UserId").val());
+
         $("#PqrsStrategicLineId").empty();
         $("#PqrsStrategicLineId").append('<option value="0">[Seleccione una Linea..]</option>');
         $.ajax({

@@ -13,7 +13,7 @@
     </di>
 </div>
 
-<table class="table">
+<table id="MyTable" class="table table-striped" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -38,3 +38,15 @@
         }
     </tbody>
 </table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#MyTable').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}

@@ -19,9 +19,9 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Proc
         [Display(Name = "Profesión")]
         public int ProfessionId { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(200)")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
+        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
         [Display(Name = "Imagen")]
         public string ImagePath { get; set; }
 
@@ -31,9 +31,9 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Proc
         [Display(Name = "Camara de Comercio")]
         public string Concept { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(200)")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
+        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
         [Display(Name = "Camara de Comercio")]
         public string DocumentoPath { get; set; }
 

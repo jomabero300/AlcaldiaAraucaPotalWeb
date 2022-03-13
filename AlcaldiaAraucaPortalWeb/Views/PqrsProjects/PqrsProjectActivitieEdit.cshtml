@@ -1,0 +1,46 @@
+﻿@model AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectActivitie
+
+@{
+    ViewData["Title"] = "Actividad";
+}
+
+
+<h1>Nueva</h1>
+
+<h4>Actividad</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PqrsProjectActivitieEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PqrsProjectId" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget" class="control-label"></label>
+                <input asp-for="Budget" class="form-control" />
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateStart" class="control-label"></label>
+                <input asp-for="DateStart" class="form-control" />
+                <span asp-validation-for="DateStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateEnd" class="control-label"></label>
+                <input asp-for="DateEnd" class="form-control" />
+                <span asp-validation-for="DateEnd" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i>Actualizar</button> |
+                <a asp-action="Edit" asp-route-id="@Model.PqrsProjectId" class="btn btn-sm btn-success"><i class="bi bi-chevron-double-left"></i>Retornar</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+

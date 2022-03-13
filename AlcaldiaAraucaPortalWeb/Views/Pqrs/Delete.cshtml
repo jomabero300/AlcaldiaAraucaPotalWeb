@@ -18,6 +18,12 @@
             @Html.DisplayFor(model => model.PqrsDate)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PqrsSubject)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PqrsSubject)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PqrsMessage)
         </dt>
         <dd class = "col-sm-10">
@@ -28,12 +34,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PqrsCategory.PqrsCategoryName)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser. FullName)
         </dd class>
     </dl>
     

@@ -16,8 +16,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Proc
         [Display(Name = "Descripción")]
         public int AffiliateProfessionId { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
-        [MaxLength(50, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
+        [Column(TypeName = "varchar(200)")]
+        [MaxLength(200, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Imagen")]
         public string AffiliateProfessionGalleryPath { get; set; }
@@ -26,6 +26,7 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Proc
         [Display(Name = "Estado")]
         [Range(minimum: 1, maximum: double.MaxValue, ErrorMessage = "Usted debe seleccionar una {0}")]
         public int StateId { get; set; }
+
         public virtual State State { get; set; }
         public virtual AffiliateProfession AffiliateProfession { get; set; }
     }

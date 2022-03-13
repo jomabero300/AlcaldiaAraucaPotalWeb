@@ -1,0 +1,28 @@
+﻿*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sens-serif;
+}
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-content:center;
+    max-width:1200px;
+    flex-wrap:wrap;
+    padding:40px 0;
+}
+
+.container .card {
+    position: relative;
+    width: 320px;
+    height: 440px;
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,0.05), inset -5px -5px 5px rgba(255,255,255,0.5), -5px, -5px, 5px, rgba(255,255,255,0.5), -5px, -5px, 5px, rgba(255,255,255,0.5);
+}

@@ -41,6 +41,18 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             return response;
         }
 
+        public async Task<List<SocialNetwork>> ByIdAffiliateAsync(int id)
+        {
+            var group = await _context.AffiliateSocialNetworks.Where(a => a.AffiliateId == id).Select(a => a.SocialNetworkId).ToListAsync();
+
+            var model = await _context.SocialNetwork.Where(g => !group.Contains(g.SocialNetworkId)).ToListAsync();
+
+            model.Add(new SocialNetwork { SocialNetworkId = 0, SocialNetworkName = "[Seleccione un red social..]" });
+
+            return model.OrderBy(g => g.SocialNetworkName).ToList();
+
+        }
+
         public async Task<SocialNetwork> ByIdAsync(int id)
         {
             var model = await _context.SocialNetwork.Include(g => g.State).FirstOrDefaultAsync(a => a.SocialNetworkId == id);
@@ -61,6 +73,15 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             var model = await _context.SocialNetwork.Where(s=>!SocialNetwork.Contains(s.SocialNetworkName)).ToListAsync();
 
             model.Add(new SocialNetwork { SocialNetworkId = 0, SocialNetworkName = "[Seleccione una red social..]" });
+
+            return model.OrderBy(m => m.SocialNetworkName).ToList();
+        }
+
+        public async Task<List<SocialNetwork>> ComboReportAsync()
+        {
+            var model = await _context.SocialNetwork.ToListAsync();
+
+            model.Add(new SocialNetwork { SocialNetworkId = 0, SocialNetworkName = "[Todas las redes sociales..]" });
 
             return model.OrderBy(m => m.SocialNetworkName).ToList();
         }

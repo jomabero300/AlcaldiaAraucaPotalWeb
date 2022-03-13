@@ -1,5 +1,6 @@
 ﻿using AlcaldiaAraucaPortalWeb.Data;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Models.ModelsViewGene;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,20 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ICommuneTownshipHelper _communeTownship;
+        private readonly INeighborhoodSidewalkHelper _neighborhoodSidewalk;
 
-        public ApplicationUsersController(ApplicationDbContext context,UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager)
+        public ApplicationUsersController(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ICommuneTownshipHelper communeTownship,
+            INeighborhoodSidewalkHelper neighborhoodSidewalk)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _communeTownship = communeTownship;
+            _neighborhoodSidewalk = neighborhoodSidewalk;
         }
         public IActionResult Index()
         {
@@ -156,6 +165,22 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
             _context.Users.Remove(state);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CommuneTownshipSearch(int ZoneId)
+        {
+            var lista = await _communeTownship.ComboAsync(ZoneId);
+
+            return Json(lista);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NeighborhoodSidewalkSearch(int CommuneTownshipId)
+        {
+            var lista = await _neighborhoodSidewalk.ComboAsync(CommuneTownshipId);
+
+            return Json(lista);
         }
     }
 }

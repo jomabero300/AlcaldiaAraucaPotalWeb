@@ -1,0 +1,37 @@
+﻿@model List<AlcaldiaAraucaPortalWeb.Models.ContentModelView>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    #header {
+        background: url(@ViewBag.RulImagen) center center / cover no-repeat;
+    }
+</style>
+<section id="header" class="jumbotron text-center">
+    <h1 class="display-3">@ViewBag.TituloHead</h1>
+    <p class="lead">@ViewBag.SubTituloHead</p>
+</section>
+
+<section id="gallery">
+    <div class="container">
+        <div class="row d-flex justify-content-center text-center g-0">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card" style="width:20em;margin:10px;">
+                        <img src="@item.img" class="card-img-top" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.title</h5>
+                            <p class="card-text">@item.text</p>
+                            <a href="" class="btn btn-outline-success btn-sm">Read More</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

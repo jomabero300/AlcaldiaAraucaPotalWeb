@@ -1,8 +1,10 @@
 ﻿using AlcaldiaAraucaPortalWeb.Data;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +14,12 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
     public class GendersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHost;
 
-        public GendersController(ApplicationDbContext context)
+        public GendersController(ApplicationDbContext context, IWebHostEnvironment webHost)
         {
             _context = context;
+            _webHost = webHost;
         }
 
         // GET: Genders
@@ -99,6 +103,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
                 {
                     _context.Update(gender);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +116,6 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(gender);
         }
@@ -149,5 +153,20 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
         {
             return _context.Genders.Any(e => e.GenderId == id);
         }
+
+        //public IActionResult Print()
+        //{
+        //    string mimtype = "";
+        //    int extension = 1;
+        //    var path = $"{_webHost.WebRootPath}\\Reports\\SampleReport.rdlc";
+        //    Dictionary<string, string> parameters = new Dictionary<string, string>();
+        //    parameters.Add("param1", "Bienvenido a telsof");
+        //    //TODO: HAY QUE INSTALAR PAQUETE VER VIEO DE REPORTE
+        //    LocalReport localReport = new LocalReport(path);
+        //    var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+
+        //    return File(result.MainStream, "application/pdf");
+        //}
+
     }
 }

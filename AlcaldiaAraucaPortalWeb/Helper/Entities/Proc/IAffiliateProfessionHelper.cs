@@ -1,11 +1,11 @@
-﻿using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using AlcaldiaAraucaPortalWeb.Models.ModelsViewRepo.Pqrs;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Proc
 {
     public interface IAffiliateProfessionHelper
     {
+        Task<List<ProfessionViewModel>> StatisticsReportAsync(ProfessionViewModel model);
     }
 }

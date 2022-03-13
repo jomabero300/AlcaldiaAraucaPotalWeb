@@ -52,7 +52,9 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             
             var model = await _context.GroupProductive.Where(g=>!affiliateGrupoProductive.Contains(g.GroupProductiveId)).ToListAsync();
 
-            return model;
+            model.Add(new GroupProductive { GroupProductiveId = 0, GroupProductiveName = "[Seleccione un Grupo..]" });
+
+            return model.OrderBy(g=>g.GroupProductiveName).ToList();
         }
 
         public async Task<List<GroupProductive>> ComboAsync()
@@ -97,5 +99,13 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             return model.OrderBy(m => m.GroupProductiveName).ToList();
         }
 
+        public async Task<List<GroupProductive>> ComboReportAsync()
+        {
+            var model = await _context.GroupProductive.Where(g => g.State.StateName.Equals("Activo")).ToListAsync();
+
+            model.Add(new GroupProductive { GroupProductiveId = 0, GroupProductiveName = "[Todos los Grupo..]" });
+
+            return model.OrderBy(m => m.GroupProductiveName).ToList();
+        }
     }
 }

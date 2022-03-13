@@ -1,0 +1,26 @@
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewRepo.Affiliate.GroupCommunityViewModel
+
+@{
+    ViewData["Title"] = "Reporte";
+}
+
+<h4>Reporte grupos comunitarios</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AffiliateGrupoComunitarioRdlc">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GroupCommunityId" class="control-label"></label>
+                <select asp-for="GroupCommunityId" class="form-control" asp-items="ViewBag.GroupCommunityId"></select>
+                <span asp-validation-for="GroupCommunityId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-pdf"></i>Generar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

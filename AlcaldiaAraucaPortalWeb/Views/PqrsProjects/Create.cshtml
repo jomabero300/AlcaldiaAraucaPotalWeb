@@ -1,0 +1,170 @@
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewGene.PqrsProjectViewModelsGene
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<form asp-action="Create">
+    <div class="row" style="width:100%;">
+        <div class="col-md-6">
+            <h4>Nuevo proyecto</h4>
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i>Guardar</button> |
+                <a asp-action="Index" class="btn btn-sm btn-success"><i class="bi bi-chevron-double-left"></i>Retornar</a>
+            </div>
+
+        </div>
+    </div>
+<hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="RegistrationDate" />
+    <input type="hidden" asp-for="StateId" />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="PqrsStrategicLineId" class="control-label"></label>
+                    <select asp-for="PqrsStrategicLineId" class="form-control" asp-items="ViewBag.PqrsStrategicLineId"></select>
+                    <span asp-validation-for="PqrsStrategicLineId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Object" class="control-label"></label>
+                    <input asp-for="Object" class="form-control" />
+                    <span asp-validation-for="Object" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="container d-flex justify-content-center">
+                        <div class="col-md-12 border shadow">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item"><a href="#Activities-tab" class="nav-link" data-toggle="pill">Actividades</a></li>
+                                <li class="nav-item"><a href="#Proponets-tab" class="nav-link" data-toggle="pill">Proponentes</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <!--Actividades-->
+                                <div class="tab-pane show fade active justify-content-center p-2" id="Activities-tab">
+                                    <div class="row" style="width:100%;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().Description" class="control-label"></label>
+                                                <input id="description" maxlength="90"  class="form-control" />
+                                                <span id="spanDescription" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().Budget" class="control-label"></label>
+                                                <input id="budget" maxlength="10" class="form-control" />
+                                                <span id="spanBudget"  class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().DateStart" class="control-label"></label>
+                                                <input id="dateStart" type="date" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectActivities.FirstOrDefault().DateEnd" class="control-label"></label>
+                                                <input id="dateEnd" type="date" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 text-right align-self-center">
+                                            <div class="form-group">
+                                                <button type="button" id="btnActivitiesAdd" onclick="ActivitiesAdd();" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i> Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div id="divActivities">
+                                            <table class="table" id="myTableActivities">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Presupuesto</th>
+                                                        <th>Fecha Inicio</th>
+                                                        <th>Fecha Final</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Proponentes-->
+                                <div class="tab-pane justify-content-center p-2" id="Proponets-tab">
+                                    <div class="row" style="width:100%;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectProponents.FirstOrDefault().Email" class="control-label"></label>
+                                                <input maxlength="60" id="email" class="form-control" />
+                                                <span id="spanEmail" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectProponents.FirstOrDefault().Name"  class="control-label"></label>
+                                                <input id="name" maxlength="60" class="form-control" />
+                                                <span id="spanName"  class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="PqrsProjectProponents.FirstOrDefault().Phone" class="control-label"></label>
+                                                <input maxlength="13" id="phone" class="form-control" />
+                                                <span id="spanPhone" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 text-right align-self-center">
+                                            <div class="form-group">
+                                                <button type="button" id="btnProponentsAdd" onclick="ProponentsAdd();" class="btn btn-sm btn-primary"><i class="bi bi-save-fill"></i> Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div id="divProponents">
+                                            <table class="table" id="myTableProponents">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Nombre</th>
+                                                        <th>Teléfono</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/js/Gene/PqrsProject.js"></script>
+}

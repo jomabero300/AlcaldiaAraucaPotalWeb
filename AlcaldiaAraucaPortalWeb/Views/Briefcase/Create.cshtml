@@ -1,4 +1,4 @@
-﻿@model AlcaldiaAraucaPortalWeb.Data.Entities.Acti.Briefcase
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewGene.BriefcaseViewModelsActi
 
 @{
     ViewData["Title"] = "Create";
@@ -8,66 +8,206 @@
 
 <h4>Briefcase</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="BriefcaseTitel" class="control-label"></label>
                 <input asp-for="BriefcaseTitel" class="form-control" />
                 <span asp-validation-for="BriefcaseTitel" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="BriefcaseImage" class="control-label"></label>
                 <input asp-for="BriefcaseImage" class="form-control" />
                 <span asp-validation-for="BriefcaseImage" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="BriefcaseText" class="control-label"></label>
                 <input asp-for="BriefcaseText" class="form-control" />
                 <span asp-validation-for="BriefcaseText" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
+
             <div class="form-group">
                 <label asp-for="BriefcaseUrl" class="control-label"></label>
                 <input asp-for="BriefcaseUrl" class="form-control" />
                 <span asp-validation-for="BriefcaseUrl" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="BriefcaseDescrption" class="control-label"></label>
                 <input asp-for="BriefcaseDescrption" class="form-control" />
                 <span asp-validation-for="BriefcaseDescrption" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                    <label asp-for="BriefcaseFacebook" class="control-label"></label>
+                    <input asp-for="BriefcaseFacebook" class="form-control" />
+                    <span asp-validation-for="BriefcaseFacebook" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BriefcaseTwitter" class="control-label"></label>
+                    <input asp-for="BriefcaseTwitter" class="form-control" />
+                    <span asp-validation-for="BriefcaseTwitter" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BriefcaseSkype" class="control-label"></label>
+                    <input asp-for="BriefcaseSkype" class="form-control" />
+                    <span asp-validation-for="BriefcaseSkype" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BriefcaseGoogle" class="control-label"></label>
+                    <input asp-for="BriefcaseGoogle" class="form-control" />
+                    <span asp-validation-for="BriefcaseGoogle" class="text-danger"></span>
+                </div>*@
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
-                <label asp-for="BriefcaseFacebook" class="control-label"></label>
-                <input asp-for="BriefcaseFacebook" class="form-control" />
-                <span asp-validation-for="BriefcaseFacebook" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BriefcaseTwitter" class="control-label"></label>
-                <input asp-for="BriefcaseTwitter" class="form-control" />
-                <span asp-validation-for="BriefcaseTwitter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BriefcaseSkype" class="control-label"></label>
-                <input asp-for="BriefcaseSkype" class="form-control" />
-                <span asp-validation-for="BriefcaseSkype" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BriefcaseGoogle" class="control-label"></label>
-                <input asp-for="BriefcaseGoogle" class="form-control" />
-                <span asp-validation-for="BriefcaseGoogle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+                <button type="submit" class="btn btn-sm btn-warning"><i class="bi bi-safe2-fill">Guardar</i></button> |
+                <a asp-action="Index" class="btn btn-sm btn-success"><i class="bi bi-chevron-left"></i> Retornar</a>
+
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <di class="col-md-5">
+            <div class="form-group">
+                <label asp-for="BriefcaseSocialNetworks.FirstOrDefault().SocialNetworkId" class="control-label"></label>
+                <select id="socialNetworkId" class="form-control" asp-items="ViewBag.SocialNetworkId"></select>
+                <span asp-validation-for="BriefcaseSocialNetworks.FirstOrDefault().SocialNetworkId" class="text-danger"></span>
+            </div>
+        </di>
+        <di class="col-md-5">
+            <div class="form-group">
+                <label asp-for="BriefcaseSocialNetworks.FirstOrDefault().URL" class="control-label"></label>
+                <input id="url" class="form-control" />
+                <span asp-validation-for="BriefcaseSocialNetworks.FirstOrDefault().URL" class="text-danger"></span>
+            </div>
+        </di>
+        <di class="col-md-2 text-right align-self-center">
+            <div class="form-group">
+                <button type="button" id="btnAddSocialNetwork" onclick="SocialNetworkAdd();" class="btn btn-sm btn-primary">Agregar</button>
+            </div>
+        </di>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <div id="divSocialNetwork">
+                <table class="table" id="myTableSocialNetwork">
+                    <thead>
+                        <tr>
+                            <th>Red social</th>
+                            <th>Url</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let numD = 0;
+
+        function SocialNetworkAdd() {
+
+            $("#myTableSocialNetwork tbody").append("<tr>" +
+                "<td>" + $("#socialNetworkId option:selected").text() + "</td>" +
+                "<td>" + $("#url").val() + "</td>" +
+                "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="SocialNetworkDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
+                "</tr>");
+
+            $("#divSocialNetwork table").append(
+                "<input type='hidden' name='BriefcaseSocialNetworks.Index' value=" + numD + " /> " +
+                "<input type='hidden' name='BriefcaseSocialNetworks[" + numD + "].SocialNetworkId' value='" + $("#socialNetworkId").val() + "'/> " +
+                "<input type='hidden' name='BriefcaseSocialNetworks[" + numD + "].URL' value='" + $("#url").val() + "'/> "
+            );
+
+            SocialNetworkClear();
+            numD++;
+            btnDisable(numD);
+            Productivo();
+
+        }
+
+        function SocialNetworkDelete(ctl) {
+
+            _row = $(ctl).parents("tr");
+
+            var cols = _row.children("td");
+
+            var count = $("#myTableSocialNetwork tr").length - 1;
+
+            var index = $(ctl).closest("tr").index();
+
+            $(ctl).parents("tr").remove();
+
+            $("input[value='" + index + "']").remove();
+
+            $("input[name='BriefcaseSocialNetworks[" + index + "].SocialNetworkId']").remove();
+
+            $("input[name='BriefcaseSocialNetworks[" + index + "].URL']").remove();
+
+            document.getElementById('btnAddPropductive').disabled = false;
+            numD--;
+
+            Productivo();
+        }
+
+        function btnDisable(valor) {
+
+            if (valor > 4) {
+                document.getElementById('btnAddSocialNetwork').disabled = true;
+            } else {
+                document.getElementById('btnAddSocialNetwork').disabled = false;
+            }
+        }
+
+        function Productivo() {
+            var tableProductive = document.getElementById('myTableSocialNetwork');
+            let ltCade = "";
+            for (var i = 1, row; row = tableProductive.rows[i]; i++) {
+                col = row.cells[0];
+                ltCade = ltCade + col.innerHTML + ",";
+            }
+
+            $("#socialNetworkId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '/Briefcase/getSocialNetwork/',
+                dataType: 'json',
+                data: { SocialNetwork: ltCade },
+                success: function (data) {
+                    $.each(data, function (i, data) {
+                        $("#socialNetworkId").append('<option value="'
+                            + data.socialNetworkId + '">'
+                            + data.socialNetworkName + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve cities.' + ex);
+                }
+            });
+
+        }
+        function SocialNetworkClear() {
+            $("#socialNetworkId").val(0)
+            $("#url").val('')
+        }
+    </script>
+    /**/
 }

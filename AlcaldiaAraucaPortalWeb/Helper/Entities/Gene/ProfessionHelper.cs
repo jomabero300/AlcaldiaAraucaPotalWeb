@@ -41,6 +41,17 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
         }
 
+        public async Task<List<Profession>> ByIdAffiliateAsync(int id)
+        {
+            var group = await _context.AffiliateProfessions.Where(a => a.AffiliateId == id).Select(a => a.ProfessionId).ToListAsync();
+
+            var model = await _context.Professions.Where(g => !group.Contains(g.ProfessionId)).ToListAsync();
+
+            model.Add(new Profession { ProfessionId = 0, ProfessionName = "[Seleccione una profesión..]" });
+
+            return model.OrderBy(g => g.ProfessionName).ToList();
+        }
+
         public async Task<Profession> ByIdAsync(int id)
         {
             var model = await _context.Professions.Include(g => g.State).FirstOrDefaultAsync(a => a.ProfessionId == id);
@@ -53,7 +64,26 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         {
             var model = await _context.Professions.Include(P=>P.State).Where(p=>p.State.StateName.Equals("Activo")).ToListAsync();
 
-            model.Add(new Profession { ProfessionId = 0, ProfessionName = "[Seleccione una Profesión..]" });
+            model.Add(new Profession { ProfessionId = 0, ProfessionName = "[Seleccione una profesión..]" });
+
+            return model.OrderBy(m => m.ProfessionName).ToList();
+        }
+
+        public async Task<List<Profession>> ComboAsync(string[] GroupProfession)
+        {
+            var model = await _context.Professions.Where(g => g.State.StateName.Equals("Activo") && !GroupProfession.Contains(g.ProfessionName)).ToListAsync();
+
+            model.Add(new Profession { ProfessionId = 0, ProfessionName = "[Seleccione una profesión..]" });
+
+            return model.OrderBy(m => m.ProfessionName).ToList();
+
+        }
+
+        public async Task<List<Profession>> ComboReportAsync()
+        {
+            var model = await _context.Professions.Include(P => P.State).Where(p => p.State.StateName.Equals("Activo")).ToListAsync();
+
+            model.Add(new Profession { ProfessionId = 0, ProfessionName = "[Todas las profesiones..]" });
 
             return model.OrderBy(m => m.ProfessionName).ToList();
         }

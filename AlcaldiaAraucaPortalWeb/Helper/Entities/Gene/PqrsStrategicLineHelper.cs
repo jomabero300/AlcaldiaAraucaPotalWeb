@@ -15,12 +15,13 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         {
             _context = context;
         }
+
         public async Task<List<PqrsStrategicLine>> PqrsStrategicLineUserComboAsync()
         {
             var modelI =await( from p in _context.PqrsStrategicLines
                          from e in _context.PqrsUserStrategicLines
                          where p.PqrsStrategicLineId == e.PqrsStrategicLineId
-                         select new { PqrsStrategicLineId = p.PqrsStrategicLineId, PqrsStrategicLineName = p.PqrsStrategicLineName }).ToListAsync();
+                         select new { PqrsStrategicLineId = p.PqrsStrategicLineId, PqrsStrategicLineName = p.PqrsStrategicLineName }).Distinct().ToListAsync();
 
             List<PqrsStrategicLine> model;
 
@@ -42,6 +43,13 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             model.Add(new PqrsStrategicLine { PqrsStrategicLineId = 0, PqrsStrategicLineName = "[Seleccione un linea..]" });
 
             return model.OrderBy(m => m.PqrsStrategicLineName).ToList();
+        }
+
+        public async Task<PqrsStrategicLine> ByNameAsync(string name)
+        {
+            var model = await _context.PqrsStrategicLines.FirstOrDefaultAsync(a => a.PqrsStrategicLineName == name);
+
+            return model;
         }
     }
 }

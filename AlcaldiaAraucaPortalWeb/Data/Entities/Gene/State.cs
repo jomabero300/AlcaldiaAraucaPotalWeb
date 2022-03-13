@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AlcaldiaAraucaPortalWeb.Data.Entities.Susc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlcaldiaAraucaPortalWeb.Data.Entities.Gene
@@ -24,7 +26,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Gene
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Activo/Inactivo")]
         public bool StateB { get; set; }
-
+        public virtual ICollection<Subscriber> Subscriber { get; set; }
+        public virtual ICollection<SubscriberSector> SubscriberSectors { get; set; }
     }
 }
 

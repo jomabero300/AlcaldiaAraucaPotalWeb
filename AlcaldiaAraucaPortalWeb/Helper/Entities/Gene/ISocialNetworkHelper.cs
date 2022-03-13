@@ -9,8 +9,10 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
     {
         Task<List<SocialNetwork>> ComboAsync();
         Task<List<SocialNetwork>> ComboAsync(string[] SocialNetwork);
+        Task<List<SocialNetwork>> ComboReportAsync();
         Task<List<SocialNetwork>> ListAsync();
         Task<SocialNetwork> ByIdAsync(int id);
+        Task<List<SocialNetwork>> ByIdAffiliateAsync(int id);
         Task<Response> AddUpdateAsync(SocialNetwork model);
         Task<Response> DeleteAsync(int id);
     }

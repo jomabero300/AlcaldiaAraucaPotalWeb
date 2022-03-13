@@ -9,7 +9,10 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
     {
         Task<Response> AddUpdateAsync(Profession model);
         Task<Profession> ByIdAsync(int id);
+        Task<List<Profession>> ByIdAffiliateAsync(int id);
         Task<List<Profession>> ComboAsync();
+        Task<List<Profession>> ComboReportAsync();
+        Task<List<Profession>> ComboAsync(string[] GroupProfession);
         Task<Response> DeleteAsync(int id);
         Task<List<Profession>> ListAsync();
     }

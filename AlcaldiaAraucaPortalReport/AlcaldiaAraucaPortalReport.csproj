@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Afiliate\AffiliateGrupoComunitario.rdlc" />
+    <None Remove="Afiliate\AffiliateProfession.rdlc" />
+    <None Remove="Afiliate\AffiliateSocialNetwork.rdlc" />
+    <None Remove="Afiliate\AfiliateGroupProductive.rdlc" />
+    <None Remove="Afiliate\UsersRegister.rdlc" />
+    <None Remove="Pqrs\PqrsDetails.rdlc" />
+    <None Remove="Pqrs\PqrsLineCategory.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Afiliate\AffiliateGrupoComunitario.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Afiliate\AffiliateProfession.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Afiliate\AffiliateSocialNetwork.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Afiliate\AfiliateGroupProductive.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Afiliate\UsersRegister.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pqrs\PqrsDetails.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pqrs\PqrsLineCategory.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

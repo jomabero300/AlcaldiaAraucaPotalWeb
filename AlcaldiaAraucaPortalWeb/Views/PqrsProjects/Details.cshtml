@@ -1,0 +1,116 @@
+﻿@model AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div>
+    <div class="row" style="width:100%;">
+        <div class="col-md-6">
+            <h4>Detalles del Proyecto</h4>
+        </div>
+        <div class="col-md-4 text-right">
+            <div class="form-group">
+                <a asp-action="Edit" asp-route-id="@Model.PqrsProjectId" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i>Editar</a> |
+                <a asp-action="Index" class="btn btn-sm btn-success"><i class="bi bi-chevron-double-left"></i>Retornar</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Object)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Object)
+        </dd>
+    </dl>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="container d-flex justify-content-center">
+            <div class="col-md-12 border shadow">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item"><a href="#Activities-tab" class="nav-link" data-toggle="pill">Actividades</a></li>
+                    <li class="nav-item"><a href="#Proponets-tab" class="nav-link" data-toggle="pill">Propononte</a></li>
+                </ul>
+                <div class="tab-content">
+                    <!--Actividades-->
+                    <div class="tab-pane show fade active justify-content-center p-2" id="Activities-tab">
+                        <div class="form-group col-md-12">
+                            <div id="divActivities">
+                                <table class="table" id="myTableActivities">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Presupuesto</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Final</th>
+                                            <th>tiemepoo de ejec</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.PqrsProjectActivities)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelitem => item.Description)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.Budget)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.DateStart)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.DateEnd)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.TiewmpoEjecucion)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Proponentes-->
+                    <div class="tab-pane justify-content-center p-2" id="Proponets-tab">
+                        <div class="form-group col-md-12">
+                            <div id="divProponents">
+                                <table class="table" id="myTableProponents">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Nombre</th>
+                                            <th>Teléfono</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.PqrsProjectProponents)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelitem => item.Email)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.Name)</td>
+                                                <td>@Html.DisplayFor(modelitem => item.Phone)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

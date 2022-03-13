@@ -4,14 +4,75 @@
     "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj": {}
   },
   "projects": {
-    "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj": {
+    "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\AlcaldiaAraucaPortalCommon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj",
-        "projectName": "AlcaldiaAraucaPortalWeb",
-        "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj",
+        "projectUniqueName": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\AlcaldiaAraucaPortalCommon.csproj",
+        "projectName": "AlcaldiaAraucaPortalCommon",
+        "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\AlcaldiaAraucaPortalCommon.csproj",
         "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
-        "outputPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\obj\\",
+        "outputPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
+        "projectName": "AlcaldiaAraucaPortalReport",
+        "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
+        "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
+        "outputPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -47,6 +108,92 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AspNetCore.Reporting": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj",
+        "projectName": "AlcaldiaAraucaPortalWeb",
+        "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb.csproj",
+        "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
+        "outputPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalWeb\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\AlcaldiaAraucaPortalCommon.csproj": {
+                "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalCommon\\AlcaldiaAraucaPortalCommon.csproj"
+              },
+              "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj": {
+                "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AspNetCore.Reporting": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.11, )"
@@ -72,6 +219,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             }
           },
           "imports": [
@@ -92,7 +243,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.209\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
         }
       }
     }

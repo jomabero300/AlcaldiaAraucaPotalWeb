@@ -1,0 +1,26 @@
+﻿@model AlcaldiaAraucaPortalWeb.Models.ModelsViewRepo.Affiliate.AffiliateSocialNetworkViewModel
+
+@{
+    ViewData["Title"] = "Reporte";
+}
+
+<h4>Reporte redes sociales</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AffiliateSocialNetworkRdlc">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SocialNetworkId" class="control-label"></label>
+                <select asp-for="SocialNetworkId" class="form-control" asp-items="ViewBag.SocialNetworkId"></select>
+                <span asp-validation-for="SocialNetworkId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-pdf"></i>Generar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

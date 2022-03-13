@@ -406,7 +406,9 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     PqrsCategoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     PqrsDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    PqrsSubject = table.Column<string>(type: "varchar(150)", nullable: false),
                     PqrsMessage = table.Column<string>(type: "varchar(200)", nullable: false),
+                    PqrsLocated = table.Column<string>(type: "varchar(20)", nullable: true),
                     StateId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

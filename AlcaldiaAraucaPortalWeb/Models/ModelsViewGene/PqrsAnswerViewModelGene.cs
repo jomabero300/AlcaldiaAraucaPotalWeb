@@ -19,6 +19,9 @@ namespace AlcaldiaAraucaPortalWeb.Models.ModelsViewGene
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime PqrsDate { get; set; }
 
+        [Display(Name = "Asunto")]
+        public string PqrsSubject { get; set; }
+
         [Display(Name = "Mensaje")]
         public string PqrsMessage { get; set; }
 

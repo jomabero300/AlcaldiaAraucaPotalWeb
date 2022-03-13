@@ -25,5 +25,16 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
             return lista;
         }
+
+        public async Task<PqrsStrategicLine> PqrsStrategicLineBIdAsync(string userId)
+        {
+            var state = await _context.States.Where(c => c.StateName.Equals("Activo") && c.StateType == "G").FirstOrDefaultAsync();
+
+            var model = await _context.PqrsUserStrategicLines.Include(p=>p.PqrsStrategicLine)
+                                      .Where(p => p.UserId == userId && p.StateId== state.StateId)
+                                      .Select(p=>new PqrsStrategicLine() { PqrsStrategicLineId=p.PqrsStrategicLineId,PqrsStrategicLineName=p.PqrsStrategicLine.PqrsStrategicLineName })
+                                      .FirstOrDefaultAsync();
+            return model;
+        }
     }
 }

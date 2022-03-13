@@ -5,13 +5,11 @@
 }
 
 <h4>Nuevo Afiliado</h4>
-<hr />
 <form asp-action="Create" enctype="multipart/form-data">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="container">
+    <div class="border p-3">
         <div class="row">
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="TypeUserId" class="control-label"></label>
@@ -77,18 +75,17 @@
                             <!--Grupoi productivo-->
                             <div class="tab-pane show fade active justify-content-center p-2" id="GroupProductive-tab">
                                 <div class="row" style="width:100%;">
-                                    <di class="col-md-10">
+                                    <div class="col-md-10">
                                         <div class="form-group">
-                                            <label asp-for="Productivo.FirstOrDefault().GroupProductiveId" class="control-label"></label>
                                             <select id="groupProductiveId" class="form-control" asp-items="ViewBag.GroupProductiveId"></select>
-                                            <span asp-validation-for="Productivo.FirstOrDefault().GroupProductiveId" class="text-danger"></span>
+                                            <span id="spangroupProductiveId" class="text-danger"></span>
                                         </div>
-                                    </di>
-                                    <di class="col-md-2 text-right align-self-center">
+                                    </div>
+                                    <div class="col-md-2 text-right align-self-center">
                                         <div class="form-group">
-                                            <button type="button" id="btnAddPropductive" onclick="ProductivoAdd();" class="btn btn-sm btn-primary">Agregar</button>
+                                            <button type="button" id="btnAddPropductive" onclick="ProductivoAdd();" class="btn btn-sm btn-primary"><i class="bi bi-download"></i>Agregar</button>
                                         </div>
-                                    </di>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-12">
@@ -112,14 +109,13 @@
                                 <div class="row" style="width:100%;">
                                     <di class="col-md-10">
                                         <div class="form-group">
-                                            <label asp-for="Comuntario.FirstOrDefault().GroupCommunityId" class="control-label"></label>
-                                            <select id="groupCommunityId" asp-for="Comuntario.FirstOrDefault().GroupCommunityId" class="form-control" asp-items="ViewBag.GroupCommunityId"></select>
-                                            <span asp-validation-for="Comuntario.FirstOrDefault().GroupCommunityId" class="text-danger"></span>
+                                            <select id="groupCommunityId" class="form-control" asp-items="ViewBag.GroupCommunityId"></select>
+                                            <span id="spanGroupCommunityId" class="text-danger"></span>
                                         </div>
                                     </di>
                                     <di class="col-md-2 text-right align-self-center">
                                         <div class="form-group">
-                                            <button type="button" id="btnGroupCommunity" onclick="CommunityAdd();" class="btn btn-sm btn-primary">Agregar</button>
+                                            <button type="button" id="btnGroupCommunity" onclick="CommunityAdd();" class="btn btn-sm btn-primary"><i class="bi bi-download"></i>Agregar</button>
                                         </div>
                                     </di>
                                 </div>
@@ -142,33 +138,29 @@
                             <!--Profesion-->
                             <div class="tab-pane justify-content-center p-2" id="Proffesional-tab">
                                 <div class="row" style="width:100%;">
-                                    <di class="col-md-10">
+                                    <div class="col-md-10">
                                         <div class="form-group">
-                                            <label asp-for="Professions.FirstOrDefault().ProfessionId" class="control-label"></label>
-                                            <select id="professionIdId" asp-for="Professions.FirstOrDefault().ProfessionId" class="form-control" asp-items="ViewBag.ProfessionId"></select>
-                                            <span asp-validation-for="Professions.FirstOrDefault().ProfessionId" class="text-danger"></span>
+                                            <select id="professionId" class="form-control" asp-items="ViewBag.ProfessionId"></select>
+                                            <span id="spanProfessionId" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group">
-                                            <label asp-for="Professions.FirstOrDefault().ImagePath" class="control-label"></label>
-                                            <input type="file" id="documentoPath" asp-for="Professions.FirstOrDefault().ImagePath" class="form-control" accept=".png" />
-                                            <span asp-validation-for="Professions.FirstOrDefault().ImagePath" class="text-danger"></span>
+                                            <input id="profImagePath" type="file" class="form-control" accept=".png" />
+                                            <span id="spanProfImagePath" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group">
-                                            <label asp-for="Professions.FirstOrDefault().Concept" class="control-label"></label>
-                                            <input id="Concept" asp-for="Professions.FirstOrDefault().Concept" class="form-control" />
-                                            <span asp-validation-for="Professions.FirstOrDefault().Concept" class="text-danger"></span>
+                                            <input id="profConcept"  placeholder="Descripción" class="form-control" maxlength="100"/>
+                                            <span id="spamProfConcept" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label asp-for="Professions.FirstOrDefault().DocumentoPath" class="control-label"></label>
-                                            <input type="file" id="documentoPath" asp-for="Professions.FirstOrDefault().DocumentoPath" class="form-control" accept=".pdf" />
-                                            <span asp-validation-for="Professions.FirstOrDefault().DocumentoPath" class="text-danger"></span>
-                                        </div>
-                                    </di>
+                                            <input id="profdocumentoPath" type="file" class="form-control" accept=".pdf" />
+                                            <span id="spanProfDocumentoPath" class="text-danger"></span>
+                                        </div>                                    
+                                    </div>
                                     <di class="col-md-2 text-right align-self-center">
                                         <div class="form-group">
-                                            <button type="button" id="btnProfession" onclick="ProfessionAdd();" class="btn btn-sm btn-primary">Agregar</button>
+                                            <button type="button" id="btnProfession" onclick="ProfessionAdd();" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Agregar</button>
                                         </div>
                                     </di>
                                 </div>
@@ -177,8 +169,9 @@
                                         <table class="table" id="myTableProfession">
                                             <thead>
                                                 <tr>
+                                                    <th>Profesion</th>
+                                                    <th>Foto</th>
                                                     <th>Descripción</th>
-                                                    <th>Concepto</th>
                                                     <th>Documento</th>
                                                     <th></th>
                                                 </tr>
@@ -188,35 +181,7 @@
                                         </table>
                                     </div>
                                 </div>
-
-
-                                @*<ul class="nav nav-pills nav-justified">
-            <li class="nav-item"><a href="#Proffesion1-tab" class="nav-link" data-toggle="pill">Profesion 1</a></li>
-            <li class="nav-item"><a href="#Proffesion2-tab" class="nav-link" data-toggle="pill">Profesion 2</a></li>
-            <li class="nav-item"><a href="#Proffesion3-tab" class="nav-link" data-toggle="pill">Profesion 3</a></li>
-        </ul>
-        <div class="tab-content">
-                <div class="tab-pane show fade active justify-content-center p-2" id="Proffesion1-tab">
-                    <div class="form-group">
-                        <label asp-for="Professions.FirstOrDefault().ProfessionId" class="control-label"></label>
-                        <select asp-for="Professions.FirstOrDefault().ProfessionId" class="form-control" asp-items="ViewBag.ProfessionId"></select>
-                        <span asp-validation-for="Professions.FirstOrDefault().ProfessionId" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="tab-pane justify-content-center p-2" id="Proffesion2-tab">
-                    <div class="form-group">
-                        <input type="file" id="profile_pic" name="profile_pic"
-                               accept=".jpg, .jpeg, .png">
-                    </div>
-                </div>
-                <div class="tab-pane justify-content-center p-2" id="Proffesion3-tab">
-                    <div class="form-group">
-                        Profesion 3
-                        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-                        <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
-                    </div>
-                </div>
-            </div>*@
+  
                             </div>
 
                             <!--Redes sociales-->
@@ -224,19 +189,17 @@
                                 <div class="row" style="width:100%;">
                                     <di class="col-md-10">
                                         <div class="form-group">
-                                            <label asp-for="SocialNetwork.FirstOrDefault().SocialNetworkId" class="control-label"></label>
                                             <select id="socialNetworkId" class="form-control" asp-items="ViewBag.SocialNetworkId"></select>
-                                            <span asp-validation-for="SocialNetwork.FirstOrDefault().SocialNetworkId" class="text-danger"></span>
+                                            <span id="spanSocialNetworkId" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label asp-for="SocialNetwork.FirstOrDefault().SocialNetworURL" class="control-label"></label>
-                                            <input id="socialNetworURL" asp-for="SocialNetwork.FirstOrDefault().SocialNetworURL" class="form-control" />
-                                            <span asp-validation-for="SocialNetwork.FirstOrDefault().SocialNetworURL" class="text-danger"></span>
+                                            <input id="socialNetworURL" placeholder="https://www.pagina.com/" maxlength="200" class="form-control" />
+                                            <span id="spanSocialNetworURL" class="text-danger"></span>
                                         </div>
                                     </di>
                                     <di class="col-md-2 text-right align-self-center">
                                         <div class="form-group">
-                                            <button type="button" id="btnAddSocialNetwork" onclick="SocialNetworkAdd();" class="btn btn-sm btn-primary">Agregar</button>
+                                            <button type="button" id="btnAddSocialNetwork" onclick="SocialNetworkAdd();" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Agregar</button>
                                         </div>
                                     </di>
                                 </div>
@@ -264,262 +227,11 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-warning"><i class="bi bi-safe2-fill">Guardar</i></button> |
-            <a asp-action="Index" class="btn btn-success"><i class="bi bi-chevron-left"></i> Retornar</a>
+            <button type="submit" class="btn btn-warning"><i class="bi bi-save-fill" style="color:white"></i> Guardar</button> |
+            <a asp-action="Index" class="btn btn-success"><i class="bi bi-chevron-double-left"></i> Retornar</a>
         </div>
     </div>
 </form>
 @section Scripts{
-    <script>
-        let numD = 0;
-        let numC = 0;
-        let numS = 0;
-
-        function ProductivoAdd() {
-
-            $("#myTableProductive tbody").append("<tr>" +
-                "<td>" + $("#groupProductiveId option:selected").text() + "</td>" +
-                "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="ProductiveDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
-                "</tr>");
-
-            $("#divProductive table").append(
-                "<input type='hidden' name='Productivo.Index' value=" + numD + " /> " +
-                "<input type='hidden' name='Productivo[" + numD + "].GroupProductiveId' value='" + $("#groupProductiveId").val() + "'/> "
-            );
-
-            $("#groupProductiveId").val(0)
-            numD++;
-            btnProdutiveAdd(numD);
-            Productivo();
-
-        }
-
-        function ProductiveDelete(ctl) {
-
-            _row = $(ctl).parents("tr");
-
-            var cols = _row.children("td");
-
-            var count = $("#myTableProductive tr").length - 1;
-
-            var index = $(ctl).closest("tr").index();
-
-            console.log(index);
-
-            $(ctl).parents("tr").remove();
-
-            $("input[value='" + index + "']").remove();
-
-            $("input[name='Productivo[" + index + "].GroupProductiveId']").remove();
-
-            document.getElementById('btnAddPropductive').disabled = false;
-            numD--;
-
-            Productivo();
-        }
-
-        function btnProdutiveAdd(valor) {
-
-            if (valor > 1) {
-                document.getElementById('btnAddPropductive').disabled = true;
-            } else {
-                document.getElementById('btnAddPropductive').disabled = false;
-            }
-        }
-
-        function Productivo() {
-            var tableProductive = document.getElementById('myTableProductive');
-            let ltCade = "";
-            for (var i = 1, row; row = tableProductive.rows[i]; i++) {
-                col = row.cells[0];
-                ltCade = ltCade + col.innerHTML + ",";
-            }
-
-            $("#groupProductiveId").empty();
-            $.ajax({
-                type: 'POST',
-                url: '/Affiliates/getProductive/',
-                dataType: 'json',
-                data: { GroupProductive: ltCade },
-                success: function (data) {
-                    $.each(data, function (i, data) {
-                        $("#groupProductiveId").append('<option value="'
-                            + data.groupProductiveId + '">'
-                            + data.groupProductiveName + '</option>');
-                    });
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve cities.' + ex);
-                }
-            });
-
-        }
-
-
-        function CommunityAdd() {
-
-            $("#myTableGroupCommunity tbody").append("<tr>" +
-                "<td>" + $("#groupCommunityId option:selected").text() + "</td>" +
-                "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="CommunityDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
-                "</tr>");
-
-            $("#divGroupCommunity table").append(
-                "<input type='hidden' name='Comuntario.Index' value=" + numC + " /> " +
-                "<input type='hidden' name='Comuntario[" + numC + "].GroupCommunityId' value='" + $("#groupCommunityId").val() + "'/> "
-            );
-
-            $("#groupCommunityId").val(0)
-            numC++;
-            btnCommunityDisable(numC);
-            Community();
-        }
-
-        function CommunityDelete(ctl) {
-
-            _row = $(ctl).parents("tr");
-
-            var cols = _row.children("td");
-
-            var count = $("#myTableGroupCommunity tr").length - 1;
-
-            var index = $(ctl).closest("tr").index();
-
-            $(ctl).parents("tr").remove();
-
-            $("input[value='" + index + "']").remove();
-
-            console.log(count);
-
-            $("input[name='Comuntario[" + index + "].GroupCommunityId']").remove();
-
-            document.getElementById('btnGroupCommunity').disabled = false;
-            numC--;
-
-            Community();
-        }
-
-        function btnCommunityDisable(valor) {
-
-            if (valor > 1) {
-                document.getElementById('btnGroupCommunity').disabled = true;
-            } else {
-                document.getElementById('btnGroupCommunity').disabled = false;
-            }
-        }
-
-        function Community() {
-            var myTable = document.getElementById('myTableGroupCommunity');
-            let ltCade = "";
-            for (var i = 1, row; row = myTable.rows[i]; i++) {
-                col = row.cells[0];
-                ltCade = ltCade + col.innerHTML + ",";
-            }
-
-            $("#groupCommunityId").empty();
-            $.ajax({
-                type: 'POST',
-                url: '/Affiliates/getCommunity/',
-                dataType: 'json',
-                data: { GroupCommunity: ltCade },
-                success: function (data) {
-                    $.each(data, function (i, data) {
-                        $("#groupCommunityId").append('<option value="'
-                            + data.groupCommunityId + '">'
-                            + data.groupCommunityName + '</option>');
-                    });
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve cities.' + ex);
-                }
-            });
-
-        }
-
-
-        function SocialNetworkAdd() {
-
-            $("#myTableSocialNetwork tbody").append("<tr>" +
-                "<td>" + $("#socialNetworkId option:selected").text() + "</td>" +
-                "<td>" + $("#socialNetworURL").val() + "</td>" +
-                "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="SocialNetworkDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
-                "</tr>");
-
-            $("#divSocialNetwork table").append(
-                "<input type='hidden' name='SocialNetwork.Index' value=" + numS + " /> " +
-                "<input type='hidden' name='SocialNetwork[" + numS + "].SocialNetworkId' value='" + $("#socialNetworkId").val() + "'/> " +
-                "<input type='hidden' name='SocialNetwork[" + numS + "].SocialNetworURL' value='" + $("#socialNetworURL").val() + "'/> "
-            );
-
-            $("#socialNetworkId").val(0);
-            $("#socialNetworURL").val("");
-            numS++;
-            btnSocialNetworkDisable(numS);
-            SocialNetwork();
-        }
-
-        function SocialNetworkDelete(ctl) {
-
-            _row = $(ctl).parents("tr");
-
-            var cols = _row.children("td");
-
-            var count = $("#myTableSocialNetwork tr").length - 1;
-
-            var index = $(ctl).closest("tr").index();
-
-            $(ctl).parents("tr").remove();
-
-            $("input[value='" + index + "']").remove();
-
-            $("input[name='SocialNetwork[" + index + "].SocialNetworkId']").remove();
-
-            $("input[name='SocialNetwork[" + index + "].SocialNetworURL']").remove();
-
-            document.getElementById('btnAddSocialNetwork').disabled = false;
-
-            numS--;
-
-            SocialNetwork();
-        }
-
-        function btnSocialNetworkDisable(valor) {
-
-            if (valor > 1) {
-                document.getElementById('btnAddSocialNetwork').disabled = true;
-            } else {
-                document.getElementById('btnAddSocialNetwork').disabled = false;
-            }
-        }
-
-        function SocialNetwork() {
-            var myTable = document.getElementById('myTableSocialNetwork');
-
-            let ltCade = "";
-
-            for (var i = 1, row; row = myTable.rows[i]; i++) {
-                col = row.cells[0];
-                ltCade = ltCade + col.innerHTML + ",";
-            }
-
-            $("#socialNetworkId").empty();
-            $.ajax({
-                type: 'POST',
-                url: '/Affiliates/getSocialNetwork/',
-                dataType: 'json',
-                data: { SocialNetwork: ltCade },
-                success: function (data) {
-                    $.each(data, function (i, data) {
-                        $("#socialNetworkId").append('<option value="'
-                            + data.socialNetworkId + '">'
-                            + data.socialNetworkName + '</option>');
-                    });
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve cities.' + ex);
-                }
-            });
-
-        }
-
-    </script>
+<script src="~/js/Afiliate/Afiliate.js"></script>
 }

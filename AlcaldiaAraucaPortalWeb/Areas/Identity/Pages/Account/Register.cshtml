@@ -3,12 +3,14 @@
 @{
     ViewData["Title"] = "Register";
 }
+
 <style>
     .note {
         text-align: center;
         height: 80px;
-        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+        background: -webkit-linear-gradient(left, #3366CC, #3366CC);
         color: #fff;
+        border-radius: 0.5rem;
         font-weight: bold;
         line-height: 80px;
     }
@@ -38,22 +40,18 @@
     }
 </style>
 
-<div class="row">
+<div class="m-0 justify-content-center">
     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <div class="row">
-
+        <div class="row justify-content-center">
             <div class="col-md-6">
-        <div class="note">
-            <p>Crear una nueva cuenta</p>
-        </div>
-
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <hr />
-
+                <div class="note">
+                    <p>Crear una nueva cuenta</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3">
+
+        <div class=" mt-2 row justify-content-center">
+            <div class="col-md-3 offset">
                 <div class="form-group">
                     @*<label asp-for="Input.DocumentTypeId"></label>*@
                     <select id="ddDocumentTypeId" asp-for="Input.DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypeId"></select>
@@ -75,26 +73,68 @@
                     <span asp-validation-for="Input.LastName" class="text-danger"></span>
                 </div>
 
-
                 <div class="form-group">
                     @*<label asp-for="Input.BirdDarte"></label>*@
-                    <input asp-for="Input.BirdDarte" class="form-control" />
+                    <input type="date" asp-for="Input.BirdDarte" class="form-control" />
                     <span asp-validation-for="Input.BirdDarte" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="col-md-3">
                 <div class="form-group">
                     @*<label asp-for="Input.GenderId"></label>*@
                     <select id="ddGenderId" asp-for="Input.GenderId" class="form-control" asp-items="ViewBag.GenderId"></select>
                     <span asp-validation-for="Input.GenderId" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
                     @*<label asp-for="Input.Email"></label>*@
                     <input asp-for="Input.Email" class="form-control" placeholder="Email" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    @*<label asp-for="Input.GenderId"></label>*@
+                    <select id="ddZoneId" asp-for="Input.ZoneId" class="form-control" asp-items="ViewBag.ZoneId"></select>
+                    <span asp-validation-for="Input.ZoneId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @*<label asp-for="Input.GenderId"></label>*@
+                    <select id="ddCommuneTownshipId" asp-for="Input.CommuneTownshipId" class="form-control" asp-items="ViewBag.CommuneTownshipId"></select>
+                    <span asp-validation-for="Input.CommuneTownshipId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @*<label asp-for="Input.GenderId"></label>*@
+                    <select id="ddNeighborhoodSidewalkId" asp-for="Input.NeighborhoodSidewalkId" class="form-control" asp-items="ViewBag.NeighborhoodSidewalkId"></select>
+                    <span asp-validation-for="Input.NeighborhoodSidewalkId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @*<label asp-for="Input.ConfirmPassword"></label>*@
+                    <input asp-for="Input.Address" class="form-control" placeholder="Direccion" />
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+
+                <!--<div class="form-group">-->
+                @*<label asp-for="Input.ConfirmPassword"></label>*@
+                <!--<input asp-for="Input.Length" class="form-control" placeholder="Longitud" />
+                    <span asp-validation-for="Input.Length" class="text-danger"></span>
+                </div>
+                <div class="form-group">-->
+                @*<label asp-for="Input.ConfirmPassword"></label>*@
+                <!--<input asp-for="Input.Latitude" class="form-control" placeholder="Latitud" />
+                    <span asp-validation-for="Input.Latitude" class="text-danger"></span>
+                </div>-->
+
+                <div class="input-group mb-4">
+                    <input asp-for="Input.Length" class="form-control" placeholder="Longitud" />
+                    <span asp-validation-for="Input.Length" class="text-danger"></span>
+                    <input asp-for="Input.Latitude" class="form-control" placeholder="Latitud" />
+                    <span asp-validation-for="Input.Latitude" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     @*<label asp-for="Input.Password"></label>*@
                     <input asp-for="Input.Password" class="form-control" placeholder="Contraseña *" />
@@ -105,13 +145,67 @@
                     <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirme contraseña *" />
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-
             </div>
         </div>
-        <button type="submit" class="btn btn-sm btn-primary btnSubmit">Register</button>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-sm btn-primary btnSubmit">Registrarse</button>
+        </div>
     </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+            $("#ddZoneId").change(function () {
+                $("#ddCommuneTownshipId").empty();
+                $("#ddNeighborhoodSidewalkId").empty();
+
+                $("#ddNeighborhoodSidewalkId").append('<option value="0">[Seleccione una opcion anterior]</option>');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ApplicationUsers/CommuneTownshipSearch/',
+                    dataType: 'json',
+                    data: { ZoneId: $("#ddZoneId").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#ddCommuneTownshipId").append('<option value="'
+                                + data.communeTownshipId + '">'
+                                + data.communeTownshipName + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve cities.' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+            $("#ddCommuneTownshipId").change(function () {
+                $("#ddNeighborhoodSidewalkId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '/ApplicationUsers/NeighborhoodSidewalkSearch/',
+                    dataType: 'json',
+                    data: { CommuneTownshipId: $("#ddCommuneTownshipId").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#ddNeighborhoodSidewalkId").append('<option value="'
+                                + data.neighborhoodSidewalkId + '">'
+                                + data.neighborhoodSidewalkName + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve cities.' + ex);
+                    }
+                });
+                return false;
+
+            })
+
+        });
+    </script>
 }

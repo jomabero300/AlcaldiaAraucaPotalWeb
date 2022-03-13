@@ -60,11 +60,12 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Proc
         [EmailAddress(ErrorMessage = "Dirección de correo electrónico inválida")]
         public string Email { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(150)")]
         [Display(Name = "Foto")]
-        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [MaxLength(150, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public string ImagePath { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual List<AffiliateGroupProductive> GroupProductives { get; set; } = new List<AffiliateGroupProductive>();
         public virtual List<AffiliateGroupCommunity> GroupCommunities { get; set; } = new List<AffiliateGroupCommunity>();

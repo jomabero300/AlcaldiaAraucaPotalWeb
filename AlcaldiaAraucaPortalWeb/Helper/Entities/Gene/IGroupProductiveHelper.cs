@@ -11,6 +11,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         Task<GroupProductive> ByIdAsync(int id);
         Task<List<GroupProductive>> ByIdAffiliateAsync(int id);
         Task<List<GroupProductive>> ComboAsync();
+        Task<List<GroupProductive>> ComboReportAsync();
         Task<List<GroupProductive>> ComboAsync(string[] GroupProductives);
         Task<Response> DeleteAsync(int id);
         Task<List<GroupProductive>> ListAsync();

@@ -1,7 +1,11 @@
 using AlcaldiaAraucaPortalWeb.Data;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Acti;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Admi;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Cont;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Proc;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Susc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,13 +40,11 @@ namespace AlcaldiaAraucaPortalWeb
             services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(options =>
+            //options => options.SignIn.RequireConfirmedAccount= true
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
+                options.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
@@ -51,12 +53,18 @@ namespace AlcaldiaAraucaPortalWeb
                 options.Password.RequiredUniqueChars = 1;
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.AllowedForNewUsers = true;
 
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABDCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
-            });
+
+            })
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -80,6 +88,24 @@ namespace AlcaldiaAraucaPortalWeb
             services.AddScoped<IProfessionHelper, ProfessionHelper>();
             services.AddScoped<IGroupCommunityHelper, GroupCommunityHelper>();
             services.AddScoped<IAffiliateGroupProductiveHelper, AffiliateGroupProductiveHelper>();
+            services.AddScoped<IBriefcaseHelper, BriefcaseHelper>();
+            services.AddScoped<IBriefcaseSocialNetworkHelper, BriefcaseSocialNetworkHelper>();
+            services.AddScoped<IZoneHelper, ZoneHelper>();
+            services.AddScoped<ICommuneTownshipHelper, CommuneTownshipHelper>();
+            services.AddScoped<INeighborhoodSidewalkHelper, NeighborhoodSidewalkHelper>();
+            services.AddScoped<IPqrsStrategicLineSectorHelper, PqrsStrategicLineSectorHelper>();
+            services.AddScoped<IContentHelper, ContentHelper>();
+            services.AddScoped<IImageHelper, ImageHelper>();
+            services.AddScoped<IMailHelper, MailHelper>();
+            services.AddScoped<IContentOdsHelper, ContentOdsHelper>();
+            services.AddScoped<IPqrsAttachmentsHelper, PqrsAttachmentsHelper>();
+            services.AddScoped<IPqrsTraceabilityHelper, PqrsTraceabilityHelper>();
+            services.AddScoped<IPqrsProjectActivitieHelper, PqrsProjectActivitieHelper>();
+            services.AddScoped<IAffiliateProfessionHelper, AffiliateProfessionHelper>();
+            services.AddScoped<IAffiliateSocialNetworkHelper, AffiliateSocialNetworkHelper>();
+            services.AddScoped<IRoleHelper, RoleHelper>();
+            services.AddScoped<ISubscriberHelper, SubscriberHelper>();
+            services.AddScoped<ISubscriberSectorHelper, SubscriberSectorHelper>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -103,7 +129,6 @@ namespace AlcaldiaAraucaPortalWeb
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 

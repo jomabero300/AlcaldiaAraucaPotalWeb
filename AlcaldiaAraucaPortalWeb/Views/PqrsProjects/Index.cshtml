@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject>
+
+@{
+    ViewData["Title"] = "Propuestas";
+}
+
+<div class="row" style="width:100%;">
+    <di class="col-md-6">
+        <h2>Propuesta detallada</h2>
+    </di>
+    <di class="col-md-4 text-right">
+        <a asp-action="Create" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-fill"></i> Nuevo</a>
+    </di>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Object)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Object)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State.StateName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PqrsProjectId" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i> Editar</a> |
+                    <button asp-action="Details" asp-route-id="@item.PqrsProjectId" class="btn btn-sm btn-info"><i class="bi bi-eye-fill"></i> Detalles</button> |
+                    <button onclick="deleteSwal(@item.PqrsProjectId)" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i> Elimnar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script src="~/js/Gene/PqrsProjectSwal.js"></script>
+}

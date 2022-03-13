@@ -46,8 +46,8 @@
                 @Html.DisplayFor(modelItem => item.State.StateName)
             </td>
             <td>
-                <a asp-action="Answer" asp-route-id="@item.PqrsId">Respuesta</a> |
-                <a asp-action="transfer" asp-route-id="@item.PqrsId">Traslado</a>
+                <a asp-action="Answer" asp-route-id="@item.PqrsId" class="btn btn-sm btn-info">Respuesta</a> |
+                <a asp-action="transfer" asp-route-id="@item.PqrsId" class="btn btn-sm btn-success">Traslado</a>
             </td>
         </tr>
 }

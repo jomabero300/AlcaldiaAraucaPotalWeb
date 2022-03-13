@@ -1,0 +1,44 @@
+﻿<link href="~/css/Subscription.css" rel="stylesheet" />
+<div class="container-icons">
+    <a asp-controller="Search" asp-action="Index">
+        <div class="row-icon icon1">
+            <h5>Buscar</h5>
+            <label class="bi bi-search label1"></label>
+        </div>
+    </a>
+    <a href="#victorModal" role="button" data-toggle="modal"><div class="row-icon icon2"><h5>P.Q.R.S.</h5><label class="bi bi-question-square-fill label2"></label></div></a>
+    <a asp-controller="Subscribers" asp-action="Index"><div class="row-icon icon3"><h5>Subscribirse</h5><label class="bi bi-person-circle label3"></label></div></a>
+    @*<a href="https://www.arauca-arauca.gov.co/Paginas/default.aspx"><div class="row-icon icon4"><h4>Web<span style="color:#3366CC">_</span>Alcaldía</h4><label class="bi bi-easel3 label4"></label></div></a>*@
+    <a href="https://www.arauca-arauca.gov.co/Paginas/default.aspx">
+        <div class="row-icon icon4">
+            <h5>Web<span style="color:#3366CC">_</span>Alcaldía</h5>
+            <img src="/Image/LogoMpio.svg" alt="Bootstrap" width="32" height="32">
+        </div>
+        </a>
+
+    <h2 class="bi bi-plus-circle-fill"></h2>
+</div>
+
+
+<!-- Modal -->
+<div id="victorModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mensajes del sistemas</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+                <p class="text-warning"><small>Mensaje del sistema de información</small></p>
+                <hr />
+                <p>Ciudadano/a tenga en cuenta que la información a registrar en el siguiente formulario se encuentra protegida bajo la Ley del Habeas data -Ley 1581 de 2012, Decreto1377 de 2013- si quiere conocer más sobre esta ley de click:</p>
+            </div>
+            <div class="modal-footer">
+                <a href="https://www.arauca-arauca.gov.co/Ciudadanos/Paginas/PQRD-Identificacion.aspx" class="mr-auto" target="_blank">PQRD con identificación</a>
+                <a href="https://www.arauca-arauca.gov.co/Ciudadanos/Paginas/PQRD-Anonima.aspx" target="_blank">PQRD anónima</a>
+
+            </div>
+        </div>
+    </div>
+</div>

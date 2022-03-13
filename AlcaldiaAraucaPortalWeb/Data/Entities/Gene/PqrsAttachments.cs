@@ -15,8 +15,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Entities.Gene
         [Range(minimum: 1, maximum: double.MaxValue, ErrorMessage = "Usted debe seleccionar una {0}")]
         public int PqrsId { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
-        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [Column(TypeName = "varchar(150)")]
+        [MaxLength(150, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [Display(Name = "Archivo")]
         public string PqrsAttachmentsPath { get; set; }

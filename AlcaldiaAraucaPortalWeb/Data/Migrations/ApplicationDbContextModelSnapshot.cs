@@ -32,22 +32,7 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("BriefcaseFacebook")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("BriefcaseGoogle")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
                     b.Property<string>("BriefcaseImage")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("BriefcaseSkype")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
@@ -62,11 +47,6 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<string>("BriefcaseTwitter")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
                     b.Property<string>("BriefcaseUrl")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -77,6 +57,152 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.ToTable("Briefcases", "Acti");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Acti.BriefcaseSocialNetwork", b =>
+                {
+                    b.Property<int>("BriefcaseSocialNetworkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BriefcaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocialNetworkId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BriefcaseSocialNetworkId");
+
+                    b.HasIndex("SocialNetworkId");
+
+                    b.HasIndex("BriefcaseId", "BriefcaseSocialNetworkId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_BriefcaseSocialNetwork_BriefcaseSocialNetworkId");
+
+                    b.ToTable("BriefcaseSocialNetworks", "Acti");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.Content", b =>
+                {
+                    b.Property<int>("ContentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ContentDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ContentText")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("ContentTitle")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("ContentUrlImg")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("PqrsStrategicLineSectorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ContentId");
+
+                    b.HasIndex("PqrsStrategicLineSectorId");
+
+                    b.HasIndex("StateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Contents", "Cont");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.ContentDetail", b =>
+                {
+                    b.Property<int>("ContentDetailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ContentDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("ContentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentTitle")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("ContentUrlImg")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContentDetailsId");
+
+                    b.HasIndex("ContentId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("ContentDetails", "Cont");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.ContentOds", b =>
+                {
+                    b.Property<int>("ContentOdsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentOdsImg")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ContentOdsText")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("ContentOdsUrl")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("PqrsStrategicLineSectorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContentOdsId");
+
+                    b.HasIndex("PqrsStrategicLineSectorId");
+
+                    b.ToTable("ContentOds", "Cont");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -84,6 +210,10 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirdDarte")
                         .HasColumnType("datetime");
@@ -120,11 +250,22 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Latitude")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Length")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("NeighborhoodSidewalkId")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -159,6 +300,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.HasIndex("GenderId");
 
+                    b.HasIndex("NeighborhoodSidewalkId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -168,6 +311,56 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.CommuneTownship", b =>
+                {
+                    b.Property<int>("CommuneTownshipId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CommuneTownshipName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<int>("MunicipalityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZoneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommuneTownshipId");
+
+                    b.HasIndex("ZoneId");
+
+                    b.HasIndex("MunicipalityId", "ZoneId", "CommuneTownshipName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_CommuneTownship_Name");
+
+                    b.ToTable("CommuneTownships", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("DepartmentId");
+
+                    b.HasIndex("DepartmentName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Department_Name");
+
+                    b.ToTable("Departments", "Gene");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.DocumentType", b =>
@@ -238,6 +431,54 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.ToTable("GroupProductives", "Gene");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Municipality", b =>
+                {
+                    b.Property<int>("MunicipalityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MunicipalityName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("MunicipalityId");
+
+                    b.HasIndex("DepartmentId", "MunicipalityName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Municipality_Name");
+
+                    b.ToTable("Municipalities", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.NeighborhoodSidewalk", b =>
+                {
+                    b.Property<int>("NeighborhoodSidewalkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommuneTownshipId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NeighborhoodSidewalkName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("NeighborhoodSidewalkId");
+
+                    b.HasIndex("CommuneTownshipId", "NeighborhoodSidewalkName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_NeighborhoodSidewalk_Name");
+
+                    b.ToTable("NeighborhoodSidewalks", "Gene");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Pqrs", b =>
                 {
                     b.Property<int>("PqrsId")
@@ -251,9 +492,19 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.Property<DateTime>("PqrsDate")
                         .HasColumnType("datetime");
 
+                    b.Property<string>("PqrsLocated")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<string>("PqrsMessage")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("PqrsSubject")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");
@@ -286,8 +537,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.Property<string>("PqrsAttachmentsPath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<int>("PqrsId")
                         .HasColumnType("int");
@@ -325,6 +576,139 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.ToTable("PqrsCategories", "Gene");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", b =>
+                {
+                    b.Property<int>("PqrsProjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("Object")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("PqrsProjectLocated")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PqrsProjectId");
+
+                    b.HasIndex("StateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PqrsProjects", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectActivitie", b =>
+                {
+                    b.Property<int>("PqrsProjectActivitieId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(90)
+                        .HasColumnType("varchar(90)");
+
+                    b.Property<int>("PqrsProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PqrsProjectActivitieId");
+
+                    b.HasIndex("PqrsProjectId");
+
+                    b.ToTable("PqrsProjectActivities", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectProponent", b =>
+                {
+                    b.Property<int>("PqrsProponentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<int>("PqrsProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PqrsProponentId");
+
+                    b.HasIndex("PqrsProjectId");
+
+                    b.ToTable("PqrsProjectProponents", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectTraceability", b =>
+                {
+                    b.Property<int>("PqrsProjectTraceabilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("PqrsProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PqrsTraceabilityDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("PqrsUserStrategicLineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PqrsProjectTraceabilityId");
+
+                    b.HasIndex("PqrsProjectId");
+
+                    b.HasIndex("PqrsUserStrategicLineId");
+
+                    b.ToTable("PqrsProjectTraceabilities", "Gene");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLine", b =>
                 {
                     b.Property<int>("PqrsStrategicLineId")
@@ -344,6 +728,30 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .HasDatabaseName("IX_PqrsStrategicLine_Name");
 
                     b.ToTable("PqrsStrategicLines", "Gene");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", b =>
+                {
+                    b.Property<int>("PqrsStrategicLineSectorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PqrsStrategicLineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PqrsStrategicLineSectorName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
+
+                    b.HasKey("PqrsStrategicLineSectorId");
+
+                    b.HasIndex("PqrsStrategicLineId", "PqrsStrategicLineSectorName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_PqrsStrategicLineSector_Name");
+
+                    b.ToTable("PqrsStrategicLineSectors", "Gene");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsTraceability", b =>
@@ -486,6 +894,27 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.ToTable("States", "Gene");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Zone", b =>
+                {
+                    b.Property<int>("ZoneId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ZoneName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.HasKey("ZoneId");
+
+                    b.HasIndex("ZoneName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Zone_Name");
+
+                    b.ToTable("Zones", "Gene");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Proc.Affiliate", b =>
                 {
                     b.Property<int>("AffiliateId")
@@ -509,8 +938,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -542,6 +971,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Affiliates", "Proc");
+
+                    b.HasCheckConstraint("ck_Affiliate_TypeUserId", "TypeUserId='P' OR TypeUserId='E'");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Proc.AffiliateGroupCommunity", b =>
@@ -609,13 +1040,13 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.Property<string>("DocumentoPath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int>("ProfessionId")
                         .HasColumnType("int");
@@ -640,8 +1071,8 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
 
                     b.Property<string>("AffiliateProfessionGalleryPath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int>("AffiliateProfessionId")
                         .HasColumnType("int");
@@ -711,6 +1142,92 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("GroupCommunities", "Proc");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.Subscriber", b =>
+                {
+                    b.Property<int>("SubscriberId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("SubscriberId");
+
+                    b.HasIndex("StateId");
+
+                    b.HasIndex("email")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Subscriber_email");
+
+                    b.ToTable("Subscriber", "Subs");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSector", b =>
+                {
+                    b.Property<int>("SubscriberSectorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PqrsStrategicLineSectorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SendUrl")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubscriberId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("varchar(2)");
+
+                    b.HasKey("SubscriberSectorId");
+
+                    b.HasIndex("PqrsStrategicLineSectorId");
+
+                    b.HasIndex("StateId");
+
+                    b.HasIndex("SubscriberId", "PqrsStrategicLineSectorId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_SubscriberSecto_SubscriberId_PqrsStrategicLineSectorId");
+
+                    b.ToTable("SubscriberSector", "Subs");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSend", b =>
+                {
+                    b.Property<int>("SubscriberSendId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("PublicationDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("SubscriberSectorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubscriberSendId");
+
+                    b.HasIndex("SubscriberSectorId");
+
+                    b.ToTable("SubscriberSend", "Subs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -844,6 +1361,82 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Acti.BriefcaseSocialNetwork", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Acti.Briefcase", "Briefcase")
+                        .WithMany("BriefcaseSocialNetworks")
+                        .HasForeignKey("BriefcaseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.SocialNetwork", "SocialNetwork")
+                        .WithMany()
+                        .HasForeignKey("SocialNetworkId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Briefcase");
+
+                    b.Navigation("SocialNetwork");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.Content", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", "PqrsStrategicLineSector")
+                        .WithMany()
+                        .HasForeignKey("PqrsStrategicLineSectorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("PqrsStrategicLineSector");
+
+                    b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.ContentDetail", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.Content", "Content")
+                        .WithMany("ContentDetails")
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Content");
+
+                    b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.ContentOds", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", "PqrsStrategicLineSector")
+                        .WithMany()
+                        .HasForeignKey("PqrsStrategicLineSectorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsStrategicLineSector");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.ApplicationUser", b =>
                 {
                     b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.DocumentType", "DocumentType")
@@ -858,9 +1451,36 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.NeighborhoodSidewalk", "NeighborhoodSidewalk")
+                        .WithMany()
+                        .HasForeignKey("NeighborhoodSidewalkId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("DocumentType");
 
                     b.Navigation("Gender");
+
+                    b.Navigation("NeighborhoodSidewalk");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.CommuneTownship", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Municipality", "Municipality")
+                        .WithMany()
+                        .HasForeignKey("MunicipalityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Zone", "Zone")
+                        .WithMany()
+                        .HasForeignKey("ZoneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Municipality");
+
+                    b.Navigation("Zone");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.GroupProductive", b =>
@@ -872,6 +1492,28 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Municipality", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.NeighborhoodSidewalk", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.CommuneTownship", "CommuneTownship")
+                        .WithMany()
+                        .HasForeignKey("CommuneTownshipId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CommuneTownship");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Pqrs", b =>
@@ -921,6 +1563,77 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectActivitie", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", "PqrsProject")
+                        .WithMany("PqrsProjectActivities")
+                        .HasForeignKey("PqrsProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsProject");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectProponent", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", "PqrsProject")
+                        .WithMany("PqrsProjectProponents")
+                        .HasForeignKey("PqrsProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsProject");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProjectTraceability", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", "PqrsProject")
+                        .WithMany()
+                        .HasForeignKey("PqrsProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsUserStrategicLine", "PqrsUserStrategicLine")
+                        .WithMany()
+                        .HasForeignKey("PqrsUserStrategicLineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsProject");
+
+                    b.Navigation("PqrsUserStrategicLine");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLine", "PqrsStrategicLine")
+                        .WithMany()
+                        .HasForeignKey("PqrsStrategicLineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsStrategicLine");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsTraceability", b =>
@@ -1108,6 +1821,55 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.Subscriber", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", "State")
+                        .WithMany("Subscriber")
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("State");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSector", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", "PqrsStrategicLineSector")
+                        .WithMany("SubscriberSectors")
+                        .HasForeignKey("PqrsStrategicLineSectorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", "State")
+                        .WithMany("SubscriberSectors")
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.Subscriber", "Subscriber")
+                        .WithMany("SubscriberSectors")
+                        .HasForeignKey("SubscriberId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PqrsStrategicLineSector");
+
+                    b.Navigation("State");
+
+                    b.Navigation("Subscriber");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSend", b =>
+                {
+                    b.HasOne("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSector", "SubscriberSector")
+                        .WithMany("SubscriberSends")
+                        .HasForeignKey("SubscriberSectorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("SubscriberSector");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1159,14 +1921,43 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Acti.Briefcase", b =>
+                {
+                    b.Navigation("BriefcaseSocialNetworks");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Cont.Content", b =>
+                {
+                    b.Navigation("ContentDetails");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.Pqrs", b =>
                 {
                     b.Navigation("PqrsAttachments");
                 });
 
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsProject", b =>
+                {
+                    b.Navigation("PqrsProjectActivities");
+
+                    b.Navigation("PqrsProjectProponents");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsStrategicLineSector", b =>
+                {
+                    b.Navigation("SubscriberSectors");
+                });
+
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.PqrsUserStrategicLine", b =>
                 {
                     b.Navigation("PqrsTraceabilities");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Gene.State", b =>
+                {
+                    b.Navigation("Subscriber");
+
+                    b.Navigation("SubscriberSectors");
                 });
 
             modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Proc.Affiliate", b =>
@@ -1178,6 +1969,16 @@ namespace AlcaldiaAraucaPortalWeb.Data.Migrations
                     b.Navigation("Professions");
 
                     b.Navigation("SocialNetworks");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.Subscriber", b =>
+                {
+                    b.Navigation("SubscriberSectors");
+                });
+
+            modelBuilder.Entity("AlcaldiaAraucaPortalWeb.Data.Entities.Susc.SubscriberSector", b =>
+                {
+                    b.Navigation("SubscriberSends");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,10 +10,10 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Estrategias
     {
         public IActionResult Index()
         {
-            Models.Content obj;
-            List<Models.Content> lobj = new List<Models.Content>();
+            Models.ContentModelView obj;
+            List<Models.ContentModelView> lobj = new List<Models.ContentModelView>();
 
-            obj = new Models.Content
+            obj = new Models.ContentModelView
             {
                 title = "Card Layout 1",
                 text = "Hello every this video I want to show how to use cardbootstrap 4 with data binding sourcer.",
@@ -22,7 +22,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Estrategias
 
             lobj.Add(obj);
 
-            obj = new Models.Content
+            obj = new Models.ContentModelView
             {
                 title = "Card Layout 2",
                 text = "Hello every this video I want to show how to use cardbootstrap 4 with data binding sourcer.",
@@ -31,7 +31,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Estrategias
 
             lobj.Add(obj);
 
-            obj = new Models.Content
+            obj = new Models.ContentModelView
             {
                 title = "Card Layout 3",
                 text = "Hello every this video I want to show how to use cardbootstrap 4 with data binding sourcer.",
@@ -39,7 +39,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Estrategias
             };
 
 
-            obj = new Models.Content
+            obj = new Models.ContentModelView
             {
                 title = "Card Layout 4",
                 text = "Hello every this video I want to show how to use cardbootstrap 4 with data binding sourcer.",

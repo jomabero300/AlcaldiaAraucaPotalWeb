@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
+                <input asp-for="ImagePath" class="form-control" type="file" />
                 <span asp-validation-for="ImagePath" class="text-danger"></span>
             </div>
         </div>
@@ -117,8 +117,8 @@
                                 <di class="col-md-10">
                                     <div class="form-group">
                                         <label asp-for="GroupCommunities.FirstOrDefault().GroupCommunityId" class="control-label"></label>
-                                        <select id="groupCommunityId" asp-for="GroupCommunities.FirstOrDefault().GroupCommunityId" class="form-control" asp-items="ViewBag.GroupCommunityId"></select>
-                                        <span asp-validation-for="GroupCommunities.FirstOrDefault().GroupCommunityId" class="text-danger"></span>
+                                        <select id="groupCommunityId" class="form-control" asp-items="ViewBag.GroupCommunityId"></select>
+                                        <span id="spanGroupCommunityId" class="text-danger"></span>
                                     </div>
                                 </di>
                                 <di class="col-md-2 text-right align-self-center">
@@ -156,19 +156,24 @@
                                 <di class="col-md-10">
                                     <div class="form-group">
                                         <label asp-for="Professions.FirstOrDefault().ProfessionId" class="control-label"></label>
-                                        <select id="professionIdId" asp-for="Professions.FirstOrDefault().ProfessionId" class="form-control" asp-items="ViewBag.ProfessionId"></select>
-                                        <span asp-validation-for="Professions.FirstOrDefault().ProfessionId" class="text-danger"></span>
+                                        <select id="professionIdId" class="form-control" asp-items="ViewBag.ProfessionId"></select>
+                                        <span id="spanProfessionId" class="text-danger"></span>
                                     </div>
 
                                     <div class="form-group">
+                                        <label asp-for="Professions.FirstOrDefault().ImagePath" class="control-label"></label>
+                                        <input id="imagePath" class="form-control" type="file" />
+                                        <span id="spanImagePath" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
                                         <label asp-for="Professions.FirstOrDefault().Concept" class="control-label"></label>
-                                        <input id="Concept" asp-for="Professions.FirstOrDefault().Concept" class="form-control" />
-                                        <span asp-validation-for="Professions.FirstOrDefault().Concept" class="text-danger"></span>
+                                        <input id="Concept" class="form-control" />
+                                        <span id="spanConcept" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="Professions.FirstOrDefault().DocumentoPath" class="control-label"></label>
-                                        <input type="file" id="documentoPath" asp-for="Professions.FirstOrDefault().DocumentoPath" class="form-control" />
-                                        <span asp-validation-for="Professions.FirstOrDefault().DocumentoPath" class="text-danger"></span>
+                                        <input type="file" id="documentoPath" class="form-control" />
+                                        <span id="spanDocumentoPath" class="text-danger"></span>
                                     </div>
                                 </di>
                                 <di class="col-md-2 text-right align-self-center">
@@ -177,12 +182,13 @@
                                     </div>
                                 </di>
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <div id="divProfession">
                                     <table class="table" id="myTableProfession">
                                         <thead>
                                             <tr>
                                                 <th>Descripción</th>
+                                                <th>Foto</th>
                                                 <th>Concepto</th>
                                                 <th>Documento</th>
                                                 <th></th>
@@ -193,9 +199,10 @@
                                             {
                                                 <tr>
                                                     <td>@Html.DisplayFor(modelitem => item.Profession.ProfessionName)</td>
+                                                    <td>@Html.DisplayFor(modelitem => item.ImagePath)</td>
                                                     <td>@Html.DisplayFor(modelitem => item.Concept)</td>
                                                     <td>@Html.DisplayFor(modelitem => item.DocumentoPath)</td>
-                                                    <td><a asp-action="DeleteProfession" asp-route-id="@item.AffiliateProfessionId" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i></a></td>
+                                                    <td><a asp-action="DeleteProfession" asp-route-id="@item.AffiliateProfessionId" class="btn btn-sm btn-danger">Eliminar</a></td>
                                                 </tr>
                                             }
 

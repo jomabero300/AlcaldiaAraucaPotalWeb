@@ -31,7 +31,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
-
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -44,9 +44,9 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            [Display(Name = "New email")]
+            [Required(ErrorMessage = "El campo {0} es requerido.")]
+            [EmailAddress(ErrorMessage ="Correo electronico invalido.")]
+            [Display(Name = "Nuevo correo electrónico")]
             public string NewEmail { get; set; }
         }
 
@@ -68,7 +68,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"No se puede cargar el usuario con ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -80,7 +80,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"No se puede cargar el usuario con ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -102,14 +102,14 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "confirme su email",
+                    $"Por favor confirme su cuenta por <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>haciendo clic aquí</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Enlace de confirmación para cambiar el correo electrónico enviado. Por favor revise su correo electrónico.";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Tu correo electrónico no ha cambiado.";
             return RedirectToPage();
         }
 
@@ -118,7 +118,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"No se puede cargar el usuario con ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -138,10 +138,10 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "confirme su email",
+                $"Por favor confirme su cuenta por <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>haciendo clic aquí</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "El mensaje de verificación ha sido enviado. Por favor revise su correo electrónico.";
             return RedirectToPage();
         }
     }

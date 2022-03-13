@@ -12,7 +12,6 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-AlcaldiaAraucaPortalWeb-342305F4-0B4E-4EE2-B8D8-E34A4F45BDE6")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlcaldiaAraucaPortalWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -1,0 +1,12 @@
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\bin\Release\net5.0\AlcaldiaAraucaPortalCommon.deps.json
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\bin\Release\net5.0\AlcaldiaAraucaPortalCommon.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\bin\Release\net5.0\ref\AlcaldiaAraucaPortalCommon.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\bin\Release\net5.0\AlcaldiaAraucaPortalCommon.pdb
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.AssemblyInfoInputs.cache
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.AssemblyInfo.cs
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.csproj.CoreCompileInputs.cache
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\ref\AlcaldiaAraucaPortalCommon.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.pdb
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalCommon\obj\Release\net5.0\AlcaldiaAraucaPortalCommon.csprojAssemblyReference.cache

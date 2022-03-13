@@ -17,6 +17,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         {
             this._context = context;
         }
+
         public async Task<Response> AddUpdateAsync(DocumentType model)
         {
             if (model.DocumentTypeId == 0)
@@ -27,14 +28,28 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             {
                 _context.DocumentTypes.Update(model);
             }
+
+
             var response = new Response() { Succeeded = true };
+
             try
             {
                 await _context.SaveChangesAsync();
             }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException.Message.Contains("duplicate"))
+                {
+                    response.Message= "Ya existe este registro";
+                }
+                else
+                {
+                    response.Message= ex.InnerException.Message;
+                }
+            }
             catch (Exception ex)
             {
-                response = DBHelper.ExceptionCatcha(ex);
+                response.Message = ex.Message;
             }
 
             return response;
@@ -73,7 +88,8 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
         }
         public async Task<List<DocumentType>> ListAsync()
         {
-            var model = await _context.DocumentTypes.ToListAsync();
+            
+            List<DocumentType> model = await _context.DocumentTypes.ToListAsync();
 
             return model.OrderBy(m => m.DocumentTypeName).ToList();
         }

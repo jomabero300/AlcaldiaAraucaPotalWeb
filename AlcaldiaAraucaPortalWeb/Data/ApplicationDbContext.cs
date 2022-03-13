@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AlcaldiaAraucaPortalWeb.Data.Entities.Cont;
+using AlcaldiaAraucaPortalWeb.Data.Entities.Susc;
 
 namespace AlcaldiaAraucaPortalWeb.Data
 {
@@ -17,7 +19,7 @@ namespace AlcaldiaAraucaPortalWeb.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            
             builder.HasDefaultSchema("Admi");
 
             builder
@@ -32,11 +34,33 @@ namespace AlcaldiaAraucaPortalWeb.Data
                 .IsUnique()
                 .HasDatabaseName("IX_Gender_Name");
 
+            builder
+                .Entity<Department>()
+                .HasIndex(g => g.DepartmentName)
+                .IsUnique()
+                .HasDatabaseName("IX_Department_Name");
+
+            builder
+                .Entity<Municipality>()
+                .HasIndex(g => new { g.DepartmentId,g.MunicipalityName })
+                .IsUnique()
+                .HasDatabaseName("IX_Department_Municipality_Name");
+
+            builder
+                .Entity<Zone>()
+                .HasIndex(g =>g.ZoneName)
+                .IsUnique()
+                .HasDatabaseName("IX_Zone_Name");
 
             builder.Entity<PqrsStrategicLine>()
                 .HasIndex(c => c.PqrsStrategicLineName)
                 .IsUnique()
                 .HasDatabaseName("IX_PqrsStrategicLine_Name");
+
+            builder.Entity<PqrsStrategicLineSector>()
+                .HasIndex(c => new {c.PqrsStrategicLineId, c.PqrsStrategicLineSectorName })
+                .IsUnique()
+                .HasDatabaseName("IX_PqrsStrategicLineSector_Name");
 
             builder.Entity<PqrsCategory>()
                 .HasIndex(c => c.PqrsCategoryName)
@@ -47,6 +71,27 @@ namespace AlcaldiaAraucaPortalWeb.Data
                 .HasIndex(c => new { c.StateName, c.StateType })
                 .IsUnique()
                 .HasDatabaseName("IX_State_Name");
+
+            builder.Entity<Department>()
+                .HasIndex(c => c.DepartmentName)
+                .IsUnique()
+                .HasDatabaseName("IX_Department_Name");
+
+            builder.Entity<Municipality>()
+                .HasIndex(c => new { c.DepartmentId,c.MunicipalityName })
+                .IsUnique()
+                .HasDatabaseName("IX_Municipality_Name");
+
+            builder.Entity<CommuneTownship>()
+                .HasIndex(c => new { c.MunicipalityId ,c.ZoneId,c.CommuneTownshipName })
+                .IsUnique()
+                .HasDatabaseName("IX_CommuneTownship_Name");
+
+            builder.Entity<NeighborhoodSidewalk>()
+                .HasIndex(c => new { c.CommuneTownshipId,c.NeighborhoodSidewalkName })
+                .IsUnique()
+                .HasDatabaseName("IX_NeighborhoodSidewalk_Name");
+
 
             builder.Entity<Profession>()
                 .HasIndex(c => c.ProfessionName)
@@ -68,6 +113,11 @@ namespace AlcaldiaAraucaPortalWeb.Data
                 .IsUnique()
                 .HasDatabaseName("IX_GroupCommunity_Name");
 
+            builder.Entity<Affiliate>()
+                .HasCheckConstraint("ck_Affiliate_TypeUserId", "TypeUserId='P' OR TypeUserId='E'");
+
+
+
             builder.Entity<AffiliateGroupCommunity>()
                 .HasIndex(c => new { c.AffiliateId, c.GroupCommunityId })
                 .IsUnique()
@@ -87,6 +137,21 @@ namespace AlcaldiaAraucaPortalWeb.Data
                 .HasIndex(c => new { c.AffiliateId, c.AffiliateGroupProductiveId})
                 .IsUnique()
                 .HasDatabaseName("IX_AffiliateGroupProductive_AffiliateGroupProductive");
+
+            builder.Entity<BriefcaseSocialNetwork>()
+                .HasIndex(c => new { c.BriefcaseId, c.BriefcaseSocialNetworkId})
+                .IsUnique()
+                .HasDatabaseName("IX_BriefcaseSocialNetwork_BriefcaseSocialNetworkId");
+
+            builder.Entity<Subscriber>()
+                .HasIndex(c=>c.email)
+                .IsUnique()
+                .HasDatabaseName("IX_Subscriber_email");
+
+            builder.Entity<SubscriberSector>()
+                .HasIndex(c=>new { c.SubscriberId,c.PqrsStrategicLineSectorId })
+                .IsUnique()
+                .HasDatabaseName("IX_SubscriberSecto_SubscriberId_PqrsStrategicLineSectorId");
 
             //this.SeedRoles(builder);
             //this.SeedUsers(builder);
@@ -207,14 +272,23 @@ namespace AlcaldiaAraucaPortalWeb.Data
         }
 
         public DbSet<Briefcase> Briefcases { get; set; }
+        public DbSet<BriefcaseSocialNetwork> BriefcaseSocialNetworks { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<Gender> Genders { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Municipality> Municipalities { get; set; }
+        public DbSet<Zone> Zones { get; set; }
+        public DbSet<CommuneTownship> CommuneTownships { get; set; }
+        public DbSet<NeighborhoodSidewalk> NeighborhoodSidewalks { get; set; }
+
         public DbSet<GroupProductive> GroupProductive { get; set; }
         public DbSet<Pqrs> Pqrs { get; set; }
         public DbSet<PqrsAttachments> PqrsAttachments { get; set; }
         public DbSet<PqrsCategory> PqrsCategories { get; set; }
         public DbSet<PqrsStrategicLine> PqrsStrategicLines { get; set; }
+        public DbSet<PqrsStrategicLineSector> PqrsStrategicLineSectors { get; set; }
         public DbSet<PqrsTraceability> PqrsTraceabilities { get; set; }
         public DbSet<PqrsUserStrategicLine> PqrsUserStrategicLines { get; set; }
         public DbSet<Profession> Professions { get; set; }
@@ -228,7 +302,16 @@ namespace AlcaldiaAraucaPortalWeb.Data
         public DbSet<AffiliateProfessionGallery> AffiliateProfessionGalleries { get; set; }
         public DbSet<AffiliateSocialNetwork> AffiliateSocialNetworks { get; set; }
         public DbSet<GroupCommunity> GroupCommunity { get; set; }
-
+        public DbSet<PqrsProject> PqrsProjects { get; set; }
+        public DbSet<PqrsProjectActivitie> PqrsProjectActivities { get; set; }
+        public DbSet<PqrsProjectProponent> PqrsProponents { get; set; }
+        public DbSet<PqrsProjectTraceability> PqrsProjectTraceabilities { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<ContentDetail> ContentDetails { get; set; }
+        public DbSet<ContentOds> ContentOds { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<SubscriberSector> SubscriberSectors { get; set; }
+        public DbSet<SubscriberSend> SubscriberSends { get; set; }
 
     }
 }

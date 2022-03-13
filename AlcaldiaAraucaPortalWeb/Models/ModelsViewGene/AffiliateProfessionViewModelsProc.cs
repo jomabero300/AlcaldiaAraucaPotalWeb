@@ -14,7 +14,7 @@ namespace AlcaldiaAraucaPortalWeb.Models.ModelsViewGene
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Imagen")]
-        public IFormFile ImagePath { get; set; }
+        public string ImagePath { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(100, ErrorMessage = "El máximo tamaño del campo {0} es {1} caractéres")]
@@ -22,7 +22,8 @@ namespace AlcaldiaAraucaPortalWeb.Models.ModelsViewGene
         public string Concept { get; set; }
 
         [Display(Name = "Camara de Comercio")]
-        public IFormFile DocumentoPath { get; set; }
+        public string DocumentoPath { get; set; }
+
         public virtual Profession Profession { get; set; }
     }
 }

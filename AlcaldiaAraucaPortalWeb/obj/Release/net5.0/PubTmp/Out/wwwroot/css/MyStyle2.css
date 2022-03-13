@@ -1,0 +1,49 @@
+﻿
+.social-sub {
+    position: fixed; /*para que quede fijo en nuestra pantalla*/
+    left: 0; /*Ubicarlo a la derecha de la pantalla*/
+    top: 35%; /*Posicionarlo casi en el centro*/
+    font-size: 1.0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /*Alinear a la parte inferior*/
+    z-index: 100; /*para que se ubique encimo del resto de la página*/
+}
+
+#search, #personcircle, #pqrs, #AlcaldiaApp {
+    color: white;
+    text-decoration: none;
+    padding: .7rem;
+    display: flex;
+    transition: all .5s;
+}
+
+    #search.bi-search {
+        background: #3366CC;
+    }
+
+    #personcircle.bi-person-circle {
+        background: #3366CC;
+
+    }
+    #pqrs.bi-question-square-fill {
+        background: #3366CC;
+
+    }
+    #AlcaldiaApp.bi-easel3 {
+        background: #3366CC;
+    }
+
+#socialsub a.bi:first-child {
+    border-radius: 0 1rem 0 0;
+}
+
+#socialsub a.bi:last-child {
+    border-radius: 0 0 1rem 0;
+}
+
+#socialsub a.bi:hover {
+    padding-left: 3rem;
+    border-radius: 0 1rem 1rem 0;
+    box-shadow: 0 0 .5rem rgba(0,0,0,0.42);
+}
