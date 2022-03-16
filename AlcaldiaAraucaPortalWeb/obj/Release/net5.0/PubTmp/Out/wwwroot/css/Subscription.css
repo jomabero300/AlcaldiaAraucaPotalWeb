@@ -35,7 +35,7 @@
     opacity:1;
 }
 
-.row-icon h4 {
+.row-icon h5 {
     transform: translate(-20px,3px);
     background: #3366CC;
     height: 30PX;
@@ -63,16 +63,16 @@
 }
 
 .container-icons:hover .icon1 {
-    transform: translate(-69px,-40px) scale(1);
+    transform: translate(-67px,-40px) scale(1);
 }
 .container-icons:hover .icon2 {
-    transform: translate(-88px,-80px) scale(1);
+    transform: translate(-79px,-80px) scale(1);
 }
 .container-icons:hover .icon3 {
-    transform: translate(-129px,-120px) scale(1);
+    transform: translate(-112px,-120px) scale(1);
 }
 .container-icons:hover .icon4 {
-    transform: translate(-145px,-160px) scale(1);
+    transform: translate(-126px,-160px) scale(1);
 }
 
 .label1 .label2 .label3 .label4 {
