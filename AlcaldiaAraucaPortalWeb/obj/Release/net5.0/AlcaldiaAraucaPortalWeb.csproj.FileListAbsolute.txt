@@ -1,5 +1,3 @@
-C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Newtonsoft.Json.dll
-C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\appsettings.Development.json
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\appsettings.json
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\AlcaldiaAraucaPortalWeb.StaticWebAssets.xml
@@ -65,6 +63,7 @@ C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Micro
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\Newtonsoft.Json.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\System.CodeDom.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\System.Composition.AttributedModel.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\System.Composition.Convention.dll
@@ -149,6 +148,7 @@ C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runti
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\win-x86\native\sni.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\bin\Release\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
@@ -326,7 +326,6 @@ C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_RedSocial.cshtml.g.cs
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_Search.cshtml.g.cs
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_Subscription.cshtml.g.cs
-C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_Subscription00.cshtml.g.cs
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\SocialNetworks\Create.cshtml.g.cs
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\SocialNetworks\Delete.cshtml.g.cs
@@ -349,3 +348,4 @@ C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Alcal
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\ref\AlcaldiaAraucaPortalWeb.dll
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\AlcaldiaAraucaPortalWeb.pdb
 C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\AlcaldiaAraucaPortalWeb.genruntimeconfig.cache
+C:\Mbel\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Shared\_AlcaldiaPqrs.cshtml.g.cs
