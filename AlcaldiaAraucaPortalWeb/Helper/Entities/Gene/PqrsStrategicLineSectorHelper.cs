@@ -18,7 +18,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
         public async Task<List<PqrsStrategicLineSector>> ComboAsync(int pqrsStrategicLineId)
         {
-            var model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineId == pqrsStrategicLineId).ToListAsync();
+            List<PqrsStrategicLineSector> model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineId == pqrsStrategicLineId).ToListAsync();
 
             model.Add(new PqrsStrategicLineSector { PqrsStrategicLineSectorId = 0, PqrsStrategicLineSectorName = "[Seleccione un Sector..]" });
 
@@ -27,14 +27,14 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
         public async Task<PqrsStrategicLineSector> ByNameAsync(string pqrsStrategicLineSectorName,int PqrsStrategicLineId)
         {
-            var model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineSectorName == pqrsStrategicLineSectorName && p.PqrsStrategicLineId==PqrsStrategicLineId).FirstOrDefaultAsync();
+            PqrsStrategicLineSector model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineSectorName == pqrsStrategicLineSectorName && p.PqrsStrategicLineId==PqrsStrategicLineId).FirstOrDefaultAsync();
 
             return model;
         }
 
         public async Task<PqrsStrategicLineSector> ByIdAsync(int pqrsStrategicLineSectorId)
         {
-            var model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineSectorId == pqrsStrategicLineSectorId).FirstOrDefaultAsync();
+            PqrsStrategicLineSector model = await _context.PqrsStrategicLineSectors.Where(p => p.PqrsStrategicLineSectorId == pqrsStrategicLineSectorId).FirstOrDefaultAsync();
 
             return model;
         }
@@ -49,7 +49,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
         public PqrsStrategicLineSector ById(int pqrsStrategicLineSectorId)
         {
-            var model = _context.PqrsStrategicLineSectors.Include(p=>p.PqrsStrategicLine).Where(p => p.PqrsStrategicLineSectorId == pqrsStrategicLineSectorId).FirstOrDefault();
+            PqrsStrategicLineSector model = _context.PqrsStrategicLineSectors.Include(p=>p.PqrsStrategicLine).Where(p => p.PqrsStrategicLineSectorId == pqrsStrategicLineSectorId).FirstOrDefault();
 
             return model;
         }

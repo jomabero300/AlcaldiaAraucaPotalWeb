@@ -50,7 +50,8 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    //return RedirectToPage("./ForgotPasswordConfirmation");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 // For more information on how to enable account confirmation and password reset please 

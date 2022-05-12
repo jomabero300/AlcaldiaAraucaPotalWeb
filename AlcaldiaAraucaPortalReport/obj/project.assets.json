@@ -2422,30 +2422,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Leo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\USUARIO\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
+      "projectUniqueName": "C:\\Mbel\\DanielCorregida\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
       "projectName": "AlcaldiaAraucaPortalReport",
-      "projectPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
-      "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
-      "outputPath": "C:\\Mbel\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\obj\\",
+      "projectPath": "C:\\Mbel\\DanielCorregida\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\AlcaldiaAraucaPortalReport.csproj",
+      "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
+      "outputPath": "C:\\Mbel\\DanielCorregida\\AlcaldiaAraucaPortalWeb\\AlcaldiaAraucaPortalReport\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -2498,7 +2493,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.211\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.105\\RuntimeIdentifierGraph.json"
       }
     }
   }

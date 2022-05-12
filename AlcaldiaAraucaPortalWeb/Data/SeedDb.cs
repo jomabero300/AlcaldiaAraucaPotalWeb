@@ -72,6 +72,7 @@ namespace AlcaldiaAraucaPortalWeb.Data
                     new State() { StateName = "Inactivo", StateB = true, StateType = "G" },
                     new State() { StateName = "Suspendido", StateB = true, StateType = "G" },
                     new State() { StateName = "Eliminado", StateB = true, StateType = "G" },
+                    new State() { StateName = "Previo", StateB = true, StateType = "G" },
                     new State() { StateName = "Abierto", StateB = true, StateType = "P" },
                     new State() { StateName = "En Trámite", StateB = true, StateType = "P" },
                     new State() { StateName = "Cerrado", StateB = true, StateType = "P" });
@@ -437,7 +438,7 @@ namespace AlcaldiaAraucaPortalWeb.Data
 
             //Crear roles
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { "Administrador", "Publicador","Usuario" };
+            string[] roleNames = { "Administrador", "Publicador","Usuario","Prensa" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)

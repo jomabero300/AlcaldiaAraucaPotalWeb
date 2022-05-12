@@ -8,6 +8,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
     {
         Task<List<PqrsStrategicLine>> PqrsStrategicLineUserComboAsync();
         Task<List<PqrsStrategicLine>> PqrsStrategicLineComboAsync();
+        Task<List<PqrsStrategicLine>> PqrsStrategicLineComboPrenAsync();
         Task<PqrsStrategicLine> ByNameAsync(string name);
     }
 }

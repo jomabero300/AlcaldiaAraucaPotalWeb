@@ -2,6 +2,7 @@
 using AlcaldiaAraucaPortalWeb.Data.Entities.Proc;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Proc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace AlcaldiaAraucaPortalWeb.Controllers.Proc
 {
+    [Authorize]
     public class GroupCommunitiesController : Controller
     {
         private readonly IGroupCommunityHelper _groupCommnuty;

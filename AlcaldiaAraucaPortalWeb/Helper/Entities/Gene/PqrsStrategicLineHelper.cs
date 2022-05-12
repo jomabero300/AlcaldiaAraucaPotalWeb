@@ -38,7 +38,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
         public async Task<List<PqrsStrategicLine>> PqrsStrategicLineComboAsync()
         {
-            var model = await _context.PqrsStrategicLines.ToListAsync();
+            List<PqrsStrategicLine> model = await _context.PqrsStrategicLines.ToListAsync();
 
             model.Add(new PqrsStrategicLine { PqrsStrategicLineId = 0, PqrsStrategicLineName = "[Seleccione un linea..]" });
 
@@ -50,6 +50,15 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             var model = await _context.PqrsStrategicLines.FirstOrDefaultAsync(a => a.PqrsStrategicLineName == name);
 
             return model;
+        }
+
+        public async Task<List<PqrsStrategicLine>> PqrsStrategicLineComboPrenAsync()
+        {
+            List<PqrsStrategicLine> model = await _context.PqrsStrategicLines.Where(s=>s.PqrsStrategicLineId!=1).ToListAsync();
+
+            model.Add(new PqrsStrategicLine { PqrsStrategicLineId = 0, PqrsStrategicLineName = "[Seleccione un linea..]" });
+
+            return model.OrderBy(m => m.PqrsStrategicLineName).ToList();
         }
     }
 }

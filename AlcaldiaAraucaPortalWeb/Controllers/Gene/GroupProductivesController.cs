@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AlcaldiaAraucaPortalWeb.Data;
-using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
-using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
+using System.Threading.Tasks;
 
 namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
 {
+    [Authorize]
     public class GroupProductivesController : Controller
     {
         private readonly IGroupProductiveHelper _groupProductive;
         private readonly IStateHelper _stateHelper;
 
-        public GroupProductivesController(IGroupProductiveHelper groupProductive,IStateHelper stateHelper)
+        public GroupProductivesController(IGroupProductiveHelper groupProductive, IStateHelper stateHelper)
         {
             _groupProductive = groupProductive;
             _stateHelper = stateHelper;
@@ -53,7 +50,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
         {
             var model = new GroupProductive()
             {
-                StateId=await _stateHelper.StateIdAsync("G","Activo")
+                StateId = await _stateHelper.StateIdAsync("G", "Activo")
             };
 
             return View(model);
@@ -97,7 +94,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
             }
 
             ViewData["StateId"] = new SelectList(await _stateHelper.StateComboAsync("G"), "StateId", "StateName", groupProductive.StateId);
-            
+
             return View(groupProductive);
         }
 
@@ -117,7 +114,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
             {
                 var response = await _groupProductive.AddUpdateAsync(model);
 
-                if(response.Succeeded)
+                if (response.Succeeded)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -154,7 +151,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Gene
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var response = await _groupProductive.DeleteAsync(id);
-            if(response.Succeeded)
+            if (response.Succeeded)
             {
                 return RedirectToAction(nameof(Index));
             }

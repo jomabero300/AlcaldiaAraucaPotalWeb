@@ -52,7 +52,7 @@ namespace AlcaldiaAraucaPortalWeb
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
 
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(60);
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.AllowedForNewUsers = true;
 
@@ -67,12 +67,12 @@ namespace AlcaldiaAraucaPortalWeb
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                //options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
 
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
+                //options.SlidingExpiration = false;
             });
 
             services.AddScoped<IDocumentTypeHelper, DocumentTypeHelper>();
@@ -106,6 +106,7 @@ namespace AlcaldiaAraucaPortalWeb
             services.AddScoped<IRoleHelper, RoleHelper>();
             services.AddScoped<ISubscriberHelper, SubscriberHelper>();
             services.AddScoped<ISubscriberSectorHelper, SubscriberSectorHelper>();
+            services.AddScoped<IFolderStrategicLineasHelper,FolderStrategicLineasHelper>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -41,6 +41,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Susc
         public async Task<List<SubscriberSector>> BySectorIdAsync(int pqrsStrategicLineSectorId)
         {
             var stateId = await _context.States.Where(s => s.StateName == "Activo" && s.StateType == "G").FirstOrDefaultAsync();
+
             List<SubscriberSector> model = await _context.SubscriberSectors
                                                         .Where(s => 
                                                                s.Subscriber.EmailConfirmed == true && 
@@ -54,7 +55,6 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Susc
             }
 
             return model;
-
         }
 
         public async Task<List<SubscriberSector>> BySubSectorAsync()

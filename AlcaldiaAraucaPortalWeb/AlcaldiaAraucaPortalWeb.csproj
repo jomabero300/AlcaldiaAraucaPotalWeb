@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Image\Imagen02.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Reports\Afiliate\AffiliateGrupoComunitario.rdlc" />
     <None Remove="Reports\Afiliate\AffiliateProfession.rdlc" />
     <None Remove="Reports\Afiliate\AffiliateSocialNetwork.rdlc" />

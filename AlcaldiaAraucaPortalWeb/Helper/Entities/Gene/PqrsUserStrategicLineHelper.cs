@@ -25,7 +25,6 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
 
             return lista;
         }
-
         public async Task<PqrsStrategicLine> PqrsStrategicLineBIdAsync(string userId)
         {
             var state = await _context.States.Where(c => c.StateName.Equals("Activo") && c.StateType == "G").FirstOrDefaultAsync();
@@ -35,6 +34,13 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
                                       .Select(p=>new PqrsStrategicLine() { PqrsStrategicLineId=p.PqrsStrategicLineId,PqrsStrategicLineName=p.PqrsStrategicLine.PqrsStrategicLineName })
                                       .FirstOrDefaultAsync();
             return model;
+        }
+
+        public async Task<PqrsStrategicLine> PqrsStrategicLineBIdAsync(int strategiaLineaId)
+        {
+            PqrsStrategicLine pqrsStrategicLine = await _context.PqrsStrategicLines.Where(p=>p.PqrsStrategicLineId==strategiaLineaId).FirstOrDefaultAsync();
+
+            return pqrsStrategicLine;
         }
     }
 }

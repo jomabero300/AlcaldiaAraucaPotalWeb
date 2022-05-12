@@ -294,7 +294,6 @@ namespace AlcaldiaAraucaPortalWeb.Data
         public DbSet<Profession> Professions { get; set; }
         public DbSet<SocialNetwork> SocialNetwork { get; set; }
         public DbSet<State> States { get; set; }
-
         public DbSet<Affiliate> Affiliates { get; set; }
         public DbSet<AffiliateGroupCommunity> AffiliateGroupCommunities { get; set; }
         public DbSet<AffiliateGroupProductive> AffiliateGroupProductives { get; set; }

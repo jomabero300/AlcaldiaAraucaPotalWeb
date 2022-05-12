@@ -606,6 +606,11 @@ namespace AlcaldiaAraucaPortalWeb.Controllers
             return View();
         }
 
+        public IActionResult NotAuthorized()
+        {
+            return View();
+        }
+
         private async void publicSend()
         {
             try

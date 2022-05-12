@@ -1,7 +1,6 @@
-﻿
-//const urlServidor = "https://localhost:44334/";
+﻿const urlServidor = window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ? "https://localhost:44334/" : "https://araucactiva.com/";
 let numD = 0;
-const urlServidor = "https://araucactiva.com/";
+//const urlServidor = "https://araucactiva.com/";
 
 function AddContentDetalle() {
     if (ContentDetalleValidate()) {
@@ -15,10 +14,11 @@ function AddContentDetalle() {
                 processData: false,
                 contentType: false,
                 success: function (data) {
+                    console.log(data);
                     $("#myTableContentDetalle tbody").append("<tr>" +
                         "<td>" + $("#contentTitle").val() + "</td>" +
                         "<td>" + $("#contentText").val() + "</td>" +
-                        "<td><img src='@Url.Content(" + data.path + ") ' class='img - rounded' alt='Image' style='width: 100px; height: 100px; max - width: 100 %; height: auto;' /></td>" +
+                        "<td><img src='" + data.path + "' class='img - rounded' alt='Image' style='width: 100px; height: 100px; max - width: 100 %; height: auto;' /></td>" +
                         "<td style='display: none;'>" + data.path + "</td>" +
                         "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="ContentDetailDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
                         "</tr>");
@@ -254,8 +254,7 @@ $(document).ready(function () {
             $("#dynamicCtr").append("<div class='form-group' id='inputFile'><input id='contentUrlImg' class='form-control' type='file' /><span id='spanContentUrlImg' class='text-danger'></span></div>");
         }
         else if ($("#OptionFile").val() == "2"){
-            $("#dynamicCtr").append("<input id='contentUrlImg' class='form-control' maxlength='150'/><span id='spanContentUrlImg' class='text-danger'></span>");
+            $("#dynamicCtr").append("<input id='contentUrlImg' class='form-control' maxlength='150' placeholder='Digite una url'/><span id='spanContentUrlImg' class='text-danger'></span>");
         }
-
     });
 });

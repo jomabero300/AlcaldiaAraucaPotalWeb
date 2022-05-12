@@ -163,7 +163,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Gene
             string FileName = string.Empty;
             string url = _configuration["MyDomain:Url"];
 
-            string[] exten = { ".png", ".jpg", ".jpeg", ".gif", ".bpm" };
+            string[] exten = { ".png", ".jpg", ".jpeg", ".gif", ".bmp",".tiff" };
 
             if (ProFile != null)
             {

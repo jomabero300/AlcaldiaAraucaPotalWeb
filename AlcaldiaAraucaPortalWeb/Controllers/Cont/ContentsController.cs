@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +35,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
         private readonly IMailHelper _mailHelper;
         private readonly ISubscriberSectorHelper _subscriberSectorHelper;
         private readonly IContentHelper _contentHelper;
+        private readonly IFolderStrategicLineasHelper _folderStrategicLineasHelper;
 
         public ContentsController(ApplicationDbContext context,
                                   IStateHelper stateHelper,
@@ -46,7 +46,8 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                                   IConfiguration configuration,
                                   IMailHelper mailHelper,
                                   ISubscriberSectorHelper subscriberSectorHelper,
-                                  IContentHelper contentHelper)
+                                  IContentHelper contentHelper, 
+                                  IFolderStrategicLineasHelper folderStrategicLineasHelper)
         {
             _context = context;
             _stateHelper = stateHelper;
@@ -57,7 +58,8 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             _configuration = configuration;
             _mailHelper = mailHelper;
             _subscriberSectorHelper = subscriberSectorHelper;
-            this._contentHelper = contentHelper;
+            _contentHelper = contentHelper;
+            _folderStrategicLineasHelper=folderStrategicLineasHelper;
         }
 
         // GET: Contents
@@ -73,9 +75,12 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                                         .Include(c => c.State)
                                         .Where(c => c.UserId == userId.Id && c.PqrsStrategicLineSector.PqrsStrategicLineId == strategiaLineaId.PqrsStrategicLineId)
                                         .OrderByDescending(x => x.ContentId);
-
+            if(strategiaLineaId==null)
+            {
+                return NotFound();
+            }
+            
             ViewBag.LineName = strategiaLineaId.PqrsStrategicLineName;
-
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -115,7 +120,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             ViewData["PqrsStrategicLineSectorId"] = new SelectList(await _strategicLineSectorHelper.ComboAsync(strategiaLineaId.PqrsStrategicLineId), "PqrsStrategicLineSectorId", "PqrsStrategicLineSectorName");
 
-            ViewBag.LineName = await lpineName();
+            ViewBag.LineName = await _folderStrategicLineasHelper.lpineName(User.Identity.Name);
 
             return View(model);
         }
@@ -130,12 +135,15 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             if (ModelState.IsValid)
             {
                 model.ContentTitle = Utilities.StartCharacterToUpper(model.ContentTitle);
+
                 model.ContentText = Utilities.StartCharacterToUpper(model.ContentText);
+                
                 if(model.ContentText.Contains("http"))
                 {
                     model.ContentText = FilesHelper.ConvertToTextInLik(model.ContentText);
                 }
-                string folder = await FolderPath(model.PqrsStrategicLineSectorId);
+
+                string folder = await _folderStrategicLineasHelper.FolderPath(model.PqrsStrategicLineSectorId,User.Identity.Name);
 
                 var path = string.Empty;
 
@@ -150,7 +158,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                 {
                     if (model.ContentDetails[i].isEsta == 1)
                     {
-                        model.ContentDetails[i].ContentUrlImg = FileMove(model.ContentDetails[i].ContentUrlImg, folder);
+                        model.ContentDetails[i].ContentUrlImg =_folderStrategicLineasHelper.FileMove(model.ContentDetails[i].ContentUrlImg, folder);
                     }
                     else
                     {
@@ -239,14 +247,11 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             ViewData["PqrsStrategicLineSectorId"] = new SelectList(await _strategicLineSectorHelper.ComboAsync(strategiaLineaId.PqrsStrategicLineId), "PqrsStrategicLineSectorId", "PqrsStrategicLineSectorName");
 
-            ViewBag.LineName = await lpineName();
+            ViewBag.LineName = await _folderStrategicLineasHelper.lpineName(User.Identity.Name);
 
             return View(model);
         }
 
-        // POST: Contents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ContentEditViewModel model)
@@ -261,7 +266,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                 try
                 {
 
-                    var folder = await FolderPath(model.PqrsStrategicLineSectorId);
+                    var folder = await _folderStrategicLineasHelper.FolderPath(model.PqrsStrategicLineSectorId,User.Identity.Name);
 
                     var path = string.Empty;
 
@@ -353,7 +358,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
                 await _context.SaveChangesAsync();
 
-                var folder = await FolderPath(content.PqrsStrategicLineSectorId);
+                var folder = await _folderStrategicLineasHelper.FolderPath(content.PqrsStrategicLineSectorId,User.Identity.Name);
 
                 var responsE = DeleteImage(content.ContentUrlImg, folder);
 
@@ -393,7 +398,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                 //TODO: Eliminar las imagenes
                 if(response.Succeeded)
                 {
-                    string folder = await FolderPath(content.PqrsStrategicLineSectorId);
+                    string folder = await _folderStrategicLineasHelper.FolderPath(content.PqrsStrategicLineSectorId,User.Identity.Name);
 
                     string responsE = DeleteImage(model.ContentUrlImg, folder);
                 }
@@ -437,7 +442,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             if (file!=null)
             {
-                string folder = await FolderPath(lineaSector.PqrsStrategicLineSectorId);
+                string folder = await _folderStrategicLineasHelper.FolderPath(lineaSector.PqrsStrategicLineSectorId,User.Identity.Name);
                 response = await _imageHelper.UploadImageAsync(file, folder);
             }
 
@@ -492,181 +497,175 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
         //    return View();
         //}
 
-        private async Task<string> lpineName()
-        {
-            var userId = await _context.ApplicationUsers.Where(c => c.Email == User.Identity.Name).FirstOrDefaultAsync();
+        //private async Task<string> lpineName()
+        //{
+        //    var userId = await _context.ApplicationUsers.Where(c => c.Email == User.Identity.Name).FirstOrDefaultAsync();
 
-            var strategiaLineaId = await _userStrategicLineHelper.PqrsStrategicLineBIdAsync(userId.Id);
+        //    var strategiaLineaId = await _userStrategicLineHelper.PqrsStrategicLineBIdAsync(userId.Id);
 
-            return strategiaLineaId.PqrsStrategicLineName;
-        }
+        //    return strategiaLineaId.PqrsStrategicLineName;
+        //}
 
-        private async Task<string> FolderPath(int pqrsStrategicLineSectorId)
-        {
-            var folderPath = "Image\\Menu\\";
+        //private async Task<string> FolderPath(int pqrsStrategicLineSectorId)
+        //{
+        //    var folderPath = "Image\\Menu\\";
 
-            var line = await lpineName();
-            var nomSector = await _strategicLineSectorHelper.ByIdAsync(pqrsStrategicLineSectorId);
+        //    var line = await lpineName();
 
-            if (line == "Arauca verde, ordenada y sostenible")
-            {
-                folderPath = folderPath + "Arauca\\";
-                if (nomSector.PqrsStrategicLineSectorName == "Ambiente desarrollo sostenible")
-                {
-                    folderPath = folderPath + "Ambiente";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial - Atención a desastres")
-                {
-                    folderPath = folderPath + "Gobierno";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
+        //    var nomSector = await _strategicLineSectorHelper.ByIdAsync(pqrsStrategicLineSectorId);
 
-            }
-            else if (line == "Buen gobierno")
-            {
-                folderPath = folderPath + "BuenGobierno\\";
-                if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial")
-                {
-                    folderPath = folderPath + "Gobierno";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Información estadisiticas")
-                {
-                    folderPath = folderPath + "Informacion";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Tecnologioas de la información y las comunicaciones")
-                {
-                    folderPath = folderPath + "Tecnologia";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
-                {
-                    folderPath = folderPath + "Vivienda";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
-            }
-            else if (line == "Crecimiento económico")
-            {
-                folderPath = folderPath + "Crecimiento\\";
-                if (nomSector.PqrsStrategicLineSectorName == "Agricultura y desarrollo rural")
-                {
-                    folderPath = folderPath + "Agricultura";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Ciencia, tecnología e innovación")
-                {
-                    folderPath = folderPath + "Ciencia";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Comercio, industria y turismo")
-                {
-                    folderPath = folderPath + "Comercio";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Trabajo")
-                {
-                    folderPath = folderPath + "Trabajo";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
-            }
-            else if (line == "Desarrollo social incluyente")
-            {
-                folderPath = folderPath + "Desarrollo\\";
+        //    if (line == "Arauca verde, ordenada y sostenible")
+        //    {
+        //        folderPath = folderPath + "Arauca\\";
+        //        if (nomSector.PqrsStrategicLineSectorName == "Ambiente desarrollo sostenible")
+        //        {
+        //            folderPath = folderPath + "Ambiente";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial - Atención a desastres")
+        //        {
+        //            folderPath = folderPath + "Gobierno";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
 
-                if (nomSector.PqrsStrategicLineSectorName == "Cultura")
-                {
-                    folderPath = folderPath + "Cultura";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Deporte")
-                {
-                    folderPath = folderPath + "Deporte";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Educación")
-                {
-                    folderPath = folderPath + "Educacion";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Inclusión social")
-                {
-                    folderPath = folderPath + "Inclusion";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Salud y protección")
-                {
-                    folderPath = folderPath + "Salud";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
-            }
-            else if (line == "Gestión del conocimiento")
-            {
-                folderPath = folderPath + "Gestion";
-            }
-            else if (line == "Infraestructura social y productiva")
-            {
-                folderPath = folderPath + "Infraestructura\\";
+        //    }
+        //    else if (line == "Buen gobierno")
+        //    {
+        //        folderPath = folderPath + "BuenGobierno\\";
+        //        if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial")
+        //        {
+        //            folderPath = folderPath + "Gobierno";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Información estadisiticas")
+        //        {
+        //            folderPath = folderPath + "Informacion";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Tecnologioas de la información y las comunicaciones")
+        //        {
+        //            folderPath = folderPath + "Tecnologia";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
+        //        {
+        //            folderPath = folderPath + "Vivienda";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
+        //    }
+        //    else if (line == "Crecimiento económico")
+        //    {
+        //        folderPath = folderPath + "Crecimiento\\";
+        //        if (nomSector.PqrsStrategicLineSectorName == "Agricultura y desarrollo rural")
+        //        {
+        //            folderPath = folderPath + "Agricultura";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Ciencia, tecnología e innovación")
+        //        {
+        //            folderPath = folderPath + "Ciencia";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Comercio, industria y turismo")
+        //        {
+        //            folderPath = folderPath + "Comercio";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Trabajo")
+        //        {
+        //            folderPath = folderPath + "Trabajo";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
+        //    }
+        //    else if (line == "Desarrollo social incluyente")
+        //    {
+        //        folderPath = folderPath + "Desarrollo\\";
 
-                if (nomSector.PqrsStrategicLineSectorName == "Minas y energía")
-                {
-                    folderPath = folderPath + "Mina";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Transporte")
-                {
-                    folderPath = folderPath + "Transporte";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
-                {
-                    folderPath = folderPath + "Vivienda";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
-            }
-            else if (line == "Seguridad convivencia y justicia")
-            {
-                folderPath = folderPath + "Seguridad\\";
+        //        if (nomSector.PqrsStrategicLineSectorName == "Cultura")
+        //        {
+        //            folderPath = folderPath + "Cultura";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Deporte")
+        //        {
+        //            folderPath = folderPath + "Deporte";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Educación")
+        //        {
+        //            folderPath = folderPath + "Educacion";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Inclusión social")
+        //        {
+        //            folderPath = folderPath + "Inclusion";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Salud y protección")
+        //        {
+        //            folderPath = folderPath + "Salud";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
+        //    }
+        //    else if (line == "Gestión del conocimiento")
+        //    {
+        //        folderPath = folderPath + "Gestion";
+        //    }
+        //    else if (line == "Infraestructura social y productiva")
+        //    {
+        //        folderPath = folderPath + "Infraestructura\\";
 
-                if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial")
-                {
-                    folderPath = folderPath + "Gobierno";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Inclusion social")
-                {
-                    folderPath = folderPath + "Inclusion";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Justicia y derecho")
-                {
-                    folderPath = folderPath + "Justicia";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
-                {
-                    folderPath = folderPath + "Vivienda";
-                }
-                else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
-                {
-                    folderPath = folderPath + "Normatividad";
-                }
-            }
+        //        if (nomSector.PqrsStrategicLineSectorName == "Minas y energía")
+        //        {
+        //            folderPath = folderPath + "Mina";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Transporte")
+        //        {
+        //            folderPath = folderPath + "Transporte";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
+        //        {
+        //            folderPath = folderPath + "Vivienda";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
+        //    }
+        //    else if (line == "Seguridad convivencia y justicia")
+        //    {
+        //        folderPath = folderPath + "Seguridad\\";
 
-            return folderPath;
-        }
+        //        if (nomSector.PqrsStrategicLineSectorName == "Gobierno territorial")
+        //        {
+        //            folderPath = folderPath + "Gobierno";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Inclusion social")
+        //        {
+        //            folderPath = folderPath + "Inclusion";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Justicia y derecho")
+        //        {
+        //            folderPath = folderPath + "Justicia";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Vivienda")
+        //        {
+        //            folderPath = folderPath + "Vivienda";
+        //        }
+        //        else if (nomSector.PqrsStrategicLineSectorName == "Normatividad")
+        //        {
+        //            folderPath = folderPath + "Normatividad";
+        //        }
+        //    }
+
+        //    return folderPath;
+        //}
 
         [HttpPost]
         public async Task<IActionResult> UploadeTemp(IFormFile file)
         {
             var folder = _configuration["MyFolders:Content"];
-            //string strFileExtnsion = Path.GetExtension(file.FileName);
-            //var suportedType = new [] { "png", "jpg", "pdf", "doc", "docx" };
-
-            //if(!suportedType.Contains(strFileExtnsion))
-            //{
-            //    //mensaje: El archivo tiene una extension invalida - Ingrese 
-            //}
 
             string response = await _imageHelper.UploadImageAsync(file, folder);
 
@@ -693,6 +692,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             return Json(new { path = "Ok" });
         }
+
         //[HttpPost]
         //public async Task<dynamic> DeleteTemp(string file)
         //{
@@ -743,28 +743,28 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             return "Ok";
         }
 
-        private string FileMove(string sourceFileName, string destFileName)
-        {
-            var Folder = destFileName.Replace("\\", "/");
+        //private string FileMove(string sourceFileName, string destFileName)
+        //{
+        //    var Folder = destFileName.Replace("\\", "/");
 
-            var pathFolder = _configuration["MyFolders:Content"];
+        //    var pathFolder = _configuration["MyFolders:Content"];
 
-            var url = _configuration["MyDomain:Url"];
+        //    var url = _configuration["MyDomain:Url"];
 
-            int star = sourceFileName.LastIndexOf("/") + 1;
+        //    int star = sourceFileName.LastIndexOf("/") + 1;
 
-            var file = sourceFileName.Substring(star, sourceFileName.Length - star);
+        //    var file = sourceFileName.Substring(star, sourceFileName.Length - star);
 
-            sourceFileName = Path.Combine(_env.WebRootPath, pathFolder, file);
+        //    sourceFileName = Path.Combine(_env.WebRootPath, pathFolder, file);
 
-            destFileName = destFileName.Replace('/', '\\');
+        //    destFileName = destFileName.Replace('/', '\\');
 
-            destFileName = Path.Combine(_env.WebRootPath, destFileName, file);
+        //    destFileName = Path.Combine(_env.WebRootPath, destFileName, file);
 
-            System.IO.File.Move(sourceFileName, destFileName);
+        //    System.IO.File.Move(sourceFileName, destFileName);
 
-            return $"{url}{Folder}/{file}";
-        }
+        //    return $"{url}{Folder}/{file}";
+        //}
 
     }
 }
