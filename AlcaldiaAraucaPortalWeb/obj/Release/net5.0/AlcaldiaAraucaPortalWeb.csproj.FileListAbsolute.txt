@@ -349,3 +349,7 @@ C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Rele
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\ref\AlcaldiaAraucaPortalWeb.dll
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\AlcaldiaAraucaPortalWeb.pdb
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\AlcaldiaAraucaPortalWeb.genruntimeconfig.cache
+C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Prensa\Create.cshtml.g.cs
+C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Prensa\Delete.cshtml.g.cs
+C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Prensa\Edit.cshtml.g.cs
+C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalWeb\obj\Release\net5.0\Razor\Views\Prensa\Index.cshtml.g.cs

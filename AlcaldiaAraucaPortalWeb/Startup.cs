@@ -119,6 +119,7 @@ namespace AlcaldiaAraucaPortalWeb
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
+
             }
             else
             {
@@ -140,8 +141,6 @@ namespace AlcaldiaAraucaPortalWeb
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            
-            //SeedDb.Seed(app);
         }
     }
 }

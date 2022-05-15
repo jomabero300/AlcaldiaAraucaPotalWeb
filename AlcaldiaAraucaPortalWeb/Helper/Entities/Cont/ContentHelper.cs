@@ -1,5 +1,6 @@
 ﻿using AlcaldiaAraucaPortalWeb.Data;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Cont;
+using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Admi;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -54,7 +55,9 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Cont
 
         public async Task<List<Content>> ListAsync(int SectorId)
         {
-            var model = await _context.Contents.Where(c => c.PqrsStrategicLineSectorId == SectorId).ToListAsync();
+            State estate = await _context.States.Where(s => s.StateName.Equals("Activo")).FirstOrDefaultAsync();
+
+            List<Content> model = await _context.Contents.Where(c => c.PqrsStrategicLineSectorId == SectorId && c.StateId==estate.StateId).ToListAsync();
 
             return model.OrderByDescending(m => m.ContentDate).ToList();
         }

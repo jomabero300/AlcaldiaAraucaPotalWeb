@@ -46,7 +46,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="ContentUrlImg" class="control-label"></label>
-                <input asp-for="ContentUrlImg" class="form-control" type="file" />
+                <input asp-for="ContentUrlImg" class="form-control" type="file" type="file" accept="image/gif, image/jpeg, image/png"/>
                 <span asp-validation-for="ContentUrlImg" class="text-danger"></span>
             </div>
         </div>
@@ -111,6 +111,11 @@
         </div>
     </div>
 </form>
+<footer>
+    <h4 style="color:white;">Avisos legales</h4>
+    <a href="#"style="color:white">Política de cookies</a>
+</footer>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/Content/Content.js"></script>

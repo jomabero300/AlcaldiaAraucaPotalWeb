@@ -58,8 +58,8 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
             _zoneHelper = zoneHelper;
             _communeTownship = communeTownship;
             _neighborhoodSidewalk = neighborhoodSidewalk;
-            this._userHelper = userHelper;
-            this._mailHelper = mailHelper;
+            _userHelper = userHelper;
+            _mailHelper = mailHelper;
         }
 
         [BindProperty]
@@ -97,7 +97,7 @@ namespace AlcaldiaAraucaPortalWeb.Areas.Identity.Pages.Account
             [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
             public DateTime BirdDarte { get; set; }
 
-            [Display(Name = "Genero")]
+            [Display(Name = "Género")]
             [Required(ErrorMessage = "El campo {0} es requerido.")]
             [Range(minimum: 1, maximum: double.MaxValue, ErrorMessage = "Usted debe seleccionar una {0}")]
             public int GenderId { get; set; }

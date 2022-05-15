@@ -49,6 +49,11 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             _subscriberSectorHelper=subscriberSectorHelper;
             _userStrategicLineHelper=userStrategicLineHelper;
         }
+
+        public IActionResult IndexPrueba()
+        {
+            return View();
+        }
         public async Task<IActionResult> Index()
         {
 
@@ -156,6 +161,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                     await _context.SaveChangesAsync();
                 }
 
+                //TODO: Applicate to update database
 
                 return RedirectToAction(nameof(Index));
             }
@@ -270,7 +276,6 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                 }
             }
 
-
             PqrsStrategicLineSector strategiaLineaId = await _strategicLineSectorHelper.ByIdAsync(model.PqrsStrategicLineSectorId);
 
             PqrsStrategicLine strategicLine = await _userStrategicLineHelper.PqrsStrategicLineBIdAsync(strategiaLineaId.PqrsStrategicLineId);
@@ -286,6 +291,74 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var content = await _context.Contents
+                .Include(c => c.ApplicationUser)
+                .Include(c => c.PqrsStrategicLineSector).ThenInclude(c => c.PqrsStrategicLine)
+                .Include(c => c.State)
+                .FirstOrDefaultAsync(m => m.ContentId == id);
+
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            return View(content);
+        }
+
+        // POST: Contents/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            //TODO: Eliminar las imagenes
+
+            var content = await _context.Contents.FindAsync(id);
+
+            try
+            {
+                var contentDetalle = await _context.ContentDetails.Where(c => c.ContentId == id).ToListAsync();
+
+                _context.ContentDetails.RemoveRange(contentDetalle);
+
+                await _context.SaveChangesAsync();
+
+                _context.Contents.Remove(content);
+
+                await _context.SaveChangesAsync();
+
+                PqrsStrategicLineSector strategiaLineaId = await _strategicLineSectorHelper.ByIdAsync(content.PqrsStrategicLineSectorId);
+
+
+                var folder = await _folderStrategicLineasHelper.FolderPath(strategiaLineaId.PqrsStrategicLineId, content.PqrsStrategicLineSectorId);
+
+                var responsE = await _imageHelper.DeleteImageAsync(content.ContentUrlImg, folder);
+
+                if (contentDetalle.Count > 0)
+                {
+                    foreach (var item in contentDetalle)
+                    {
+                        var respons = await _imageHelper.DeleteImageAsync(item.ContentUrlImg, folder);
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return View(content);
         }
 
         public async Task<JsonResult> getSector(int Id)
