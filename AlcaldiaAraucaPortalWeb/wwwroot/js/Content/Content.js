@@ -1,12 +1,17 @@
 ﻿const urlServidor = window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ? "https://localhost:44334/" : "https://araucactiva.com/";
 let numD = 0;
+let activeId = 0;
+
 
 function AddContentDetalle() {
 
     if (ContentDetalleValidate()) {
         if ($("#OptionFile").val() == "1") {
+
             let formData = new FormData();
+
             formData.append("file", $("#contentUrlImg")[0].files[0]);
+
             $.ajax({
                 type: "POST",
                 url: urlServidor + "Contents/UploadeTemp",
@@ -14,69 +19,28 @@ function AddContentDetalle() {
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    let img;
-                    if (data.path.includes("pdf")) {
-                        img = "<td><a href='" + data.path + "' target='_blank'><i class='bi bi-file-earmark-pdf-fill' style='font-size:30px;'></i></a></td>";
-                        console.log("pdf");
-                    } else if (data.path.includes("png")) {
-                        img = "<td><img src='" + data.path + "' class='img-rounded' alt='Image' style='width: 100px; height: 100px; max-width: 100 %; height: auto;'/></td>";
-                        console.log("png");
+                    if ($("#btnAddContentDetalle").text() == "Agregar") {
+                        ContentDetailBuildTableRow(numD, data.path);
+                        numD++;
                     } else {
-                        img = "<td><iframe width='40' height='20' src='" + data.path + "' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
-                        console.log("video");
+                        ContentDetailUpdateInTable(activeId, data.path);
                     }
-                    console.log(img);
-
-                    $("#myTableContentDetalle tbody").append("<tr>" +
-                        "<td>" + $("#contentTitle").val() + "</td>" +
-                        "<td>" + $("#contentText").val() + "</td>" +
-                        img +
-                        "<td style='display: none;'>" + data.path + "</td>" +
-                        "<td>" + '<button class="btn btn-sm btn-warning" type="button" onclick="ContentDetailEdit(this)"><i class="bi bi-pencil-fill"></i></button>' + "</td>" +
-                        "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="ContentDetailDelete(this)"><i class="bi bi-trash2-fill"></i></button>' + "</td>" +
-                        "</tr>");
-
-                    $("#divContentDetalle table").append(
-                        "<input type='hidden' name='ContentDetails.Index' value=" + numD + " /> " +
-                        "<input type='hidden' name='ContentDetails[" + numD + "].ContentTitle' value='" + $("#contentTitle").val() + "'/> " +
-                        "<input type='hidden' name='ContentDetails[" + numD + "].ContentText' value='" + $("#contentText").val() + "'/> " +
-                        "<input type='hidden' name='ContentDetails[" + numD + "].ContentUrlImg' value='" + data.path + "'/> "+
-                        "<input type='hidden' name='ContentDetails[" + numD + "].isEsta' value='1'/> "
-                    );
-
-                    $("#contentTitle").val("");
-                    $("#contentText").val("");
-                    $("#contentUrlImg").val("");
-
-                    numD++;
                 },
                 error: function (ex) {
                     alert('Failed to retrieve.' + ex);
                 }
             });
         } else {
-            let img = "<td><iframe width='40' height='20' src='" + $("#contentUrlImg").val() + "' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
-
-            $("#myTableContentDetalle tbody").append("<tr>" +
-                "<td>" + $("#contentTitle").val() + "</td>" +
-                "<td>" + $("#contentText").val() + "</td>" +
-                img +
-                "<td style='display: none;'>" + $("#contentUrlImg").val() + "</td>" +
-                "<td>" + '<button class="btn btn-sm btn-warning" type="button" onclick="ContentDetailEdit(this)"><i class="bi bi-pencil-fill"></i></button>' + "</td>" +
-                "<td>" + '<button class="btn btn-sm btn-danger" type="button" onclick="ContentDetailDelete(this)"><i class="bi bi-trash2"></i></button>' + "</td>" +
-                "</tr>");
-
-            $("#divContentDetalle table").append(
-                "<input type='hidden' name='ContentDetails.Index' value=" + numD + " /> " +
-                "<input type='hidden' name='ContentDetails[" + numD + "].ContentTitle' value='" + $("#contentTitle").val() + "'/> " +
-                "<input type='hidden' name='ContentDetails[" + numD + "].ContentText' value='" + $("#contentText").val() + "'/> " +
-                "<input type='hidden' name='ContentDetails[" + numD + "].ContentUrlImg' value='" + $("#contentUrlImg").val() + "'/> " +
-                "<input type='hidden' name='ContentDetails[" + numD + "].isEsta' value='0'/> "
-            );
-
-            $("#contentTitle").val("");
-            $("#contentText").val("");
-            $("#contentUrlImg").val("");
+            let URL = $("#contentUrlImg").val().trim();
+            console.log($("#optionFile").text());
+            let imgPath = URL == "" ? $("#optionFile").text() : URL;
+            console.log(imgPath);
+            if ($("#btnAddContentDetalle").text() == "Agregar") {
+                ContentDetailBuildTableRow(numD, imgPath);
+                numD++;
+            } else {
+                ContentDetailUpdateInTable(activeId, imgPath);
+            }
         }        
     }
 }
@@ -101,10 +65,11 @@ function ContentDetailDelete(ctl) {
             $(ctl).parents("tr").remove();
 
             $("input[value='" + index + "']").remove();
-
             $("input[name='ContentDetails[" + index + "].ContentTitle']").remove();
             $("input[name='ContentDetails[" + index + "].ContentText']").remove();
             $("input[name='ContentDetails[" + index + "].ContentUrlImg']").remove();
+
+            $("input[name='ContentDetails[" + index + "].ContentUrlImg']").after();
 
             numD--;
         },
@@ -144,24 +109,25 @@ function ContentDetalleValidate() {
 
         isValid = false;
     }
+    if ($("#btnAddContentDetalle").text() == "Agregar") {
+        if ($("#OptionFile").val() == null) {
+            $('#spanOptionFile').text('!El campo es requerido¡').show();
 
-    if ($("#OptionFile").val() == null) {
-        $('#spanOptionFile').text('!El campo es requerido¡').show();
+            if (isValid) {
+                $('#OptionFile').focus();
+            }
 
-        if (isValid) {
-            $('#OptionFile').focus();
+            isValid = false;
+        } else if ($('#contentUrlImg').val().trim() == "") {
+
+            $('#spanContentUrlImg').text('!El campo es requerido¡').show();
+
+            if (isValid) {
+                $('#contentUrlImg').focus();
+            }
+
+            isValid = false;
         }
-
-        isValid = false;
-    } else if ($('#contentUrlImg').val().trim() == "") {
-
-        $('#spanContentUrlImg').text('!El campo es requerido¡').show();
-
-        if (isValid) {
-            $('#contentUrlImg').focus();
-        }
-
-        isValid = false;
     }
 
 
@@ -313,24 +279,117 @@ function ContentEditDetalleValidate() {
     return isValid;
 }
 
+
 function ContentDetailEdit(ctl) {
 
-    _row = $(ctl).parents("tr");
+    let _row = $(ctl).parents("tr");
 
     let cols = _row.children("td");
 
-    let title = $(cols[0]).text();
-    let text = $(cols[1]).text();
-    let path = $(cols[2]).find('img').attr('src');
-    let id = $(cols[3]).text();
-    let fecha = $(cols[4]).text();
+    activeId = $($(cols[6]).children("button")[0]).data("id");
 
-    $("#contentTitle").val(title);
-    $("#contentText").text(text);
-    $("#contentDetailsId").text(id);
-    $("#optionFile").text(path);
-    $("#contentDate").text(fecha);
+    $("#contentTitle").val($(cols[0]).text());
+
+    $("#contentText").val($(cols[1]).text());
+
+    //$("#optionFile").text($(cols[2]).find('img').attr('src'));
+
+    $("#optionFile").text($(cols[3]).text());
+
+    console.log($(cols[3]).text());
+
+    $("#contentDetailsId").text($(cols[4]).text());
+
+    $("#contentDate").text($(cols[5]).text());
+
+    $("#btnAddContentDetalle").text("Actualizar");
 }
+
+function ContentDetailBuildTableRow(id,fileExte) {
+    let img = fImg(fileExte);
+
+    $("#myTableContentDetalle tbody").append(
+        MyTable(id, fileExte, img)
+    );
+
+    $("#divContentDetalle table").append(
+        DivTable(id, fileExte)
+    );
+
+    formClear();
+}
+
+function MyTable(id, fileExten, img) {
+    let ret = "<tr>" +
+                    "<td width='10%'>" + $("#contentTitle").val() + "</td>" +
+                    "<td width='72%'>" + $("#contentText").val() + "</td>" +
+                    img +
+                    "<td style='display: none;'>" + fileExten + "</td>" +
+                    "<td style='display: none;'>" + id + "</td>" +
+                    "<td style='display: none;'>01/01/2022</td>" +
+                    "<td width='8%'><button class='btn btn-sm btn-warning' type='button' onclick='ContentDetailEdit(this)' data-id='" + id + "'><i class='bi bi-pencil-fill'></i></button> |" +
+                                   "<button class='btn btn-sm btn-danger' type='button' onclick='ContentDetailDelete(this)' data-id='" + id + "'><i class='bi bi-trash2'></i></button></td>" +
+                "</tr>";
+
+    return ret;
+}
+function DivTable(id, fileExten) {
+    let ret = "<input type='hidden' name='ContentDetails.Index' value=" + id + " /> " +
+        "<input id=ContentTitle" + id +" type='hidden' name='ContentDetails[" + id + "].ContentTitle' value='" + $("#contentTitle").val() + "'/> " +
+        "<input id=ContentText" + id +" type='hidden' name='ContentDetails[" + id + "].ContentText' value='" + $("#contentText").val() + "'/> " +
+        "<input id=ContentUrlImg" + id +" type='hidden' name='ContentDetails[" + id + "].ContentUrlImg' value='" + fileExten + "'/> " +
+        "<input id=isEsta" + id +" type='hidden' name='ContentDetails[" + id + "].isEsta' value='0'/> ";
+    return ret;
+}
+function fImg(fileExten) {
+    let img = "";
+
+    if (fileExten.includes(".pdf")) {
+        img = "<td width='10%'><a href='" + fileExten + "' target='_blank'><i class='bi bi-file-earmark-pdf-fill' style='font-size:30px;'></i></a></td>";
+    } else if (fileExten.includes(".png")) {
+        img = "<td width='10%'><img src='" + fileExten + "' class='img-rounded' alt='Image' style='width: 100px; height: 100px; max-width: 100 %; height: auto;'/></td>";
+    } else {
+        img = "<td width='10%'><iframe width='40' height='20' src='" + fileExten + "' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+    }
+
+    return img;
+}
+
+function ContentDetailUpdateInTable(id, fileCadena) {
+
+    var row = $("#myTableContentDetalle button[data-id='" + id + "']")
+        .parents("tr")[0];
+
+    let img = fImg(fileCadena);
+
+    $(row).after(MyTable(id, fileCadena,img));
+
+    $(row).remove();
+
+    let InputName = "";
+
+    if (fileCadena != "") {
+        InputName= 'ContentUrlImg' + id;
+        document.getElementById(InputName).value = fileCadena;
+    }
+
+    InputName = 'ContentTitle' + id;
+    document.getElementById(InputName).value = $("#contentTitle").val();
+    InputName = 'ContentText' + id;
+    document.getElementById(InputName).value = $("#contentText").val();
+
+    formClear();
+
+    $("#btnAddContentDetalle").text("Agregar");
+
+}
+
+function formClear() {
+    $("#contentTitle").val("");
+    $("#contentText").val("");
+    $("#contentUrlImg").val("");
+}
+
 
 $(document).ready(function () {
 
