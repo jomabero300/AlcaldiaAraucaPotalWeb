@@ -76,7 +76,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="ContentDetails.FirstOrDefault().ContentText" class="control-label"></label>
-                <textarea class="form-control" id="contentText" rows="2"></textarea>
+                <textarea id="contentText" class="form-control" rows="2"></textarea>
                 <span id="spanContentText" class="text-danger"></span>
             </div>
         </div>
@@ -136,12 +136,13 @@
                                 <iframe width="50" height="50" src="@item.ContentUrlImg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             }
                         </td>
+                        <td style="display: none;">@Html.DisplayFor(modelitem => item.ContentUrlImg)</td>                        
                         <td style="display: none;">@Html.DisplayFor(modelitem => item.ContentDetailsId)</td>                        
                         <td style="display: none;">@Html.DisplayFor(modelitem => item.ContentDate)</td>
 
                         <td width="8%">
                             <button type="button" onclick="ContentDetailEdit(this);" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></button> |
-                            <button type="button" onclick="ContentEditDetailDelete(@item.ContentDetailsId,@item.ContentId);" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                            <button type="button" onclick="ContentEditDetailDelete(@item.ContentDetailsId,@item.ContentId,1);" class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i></button>
                         </td>
                     </tr>
                 }

@@ -159,7 +159,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
                 {
                     if (model.ContentDetails[i].isEsta == 1)
                     {
-                        model.ContentDetails[i].ContentUrlImg =_folderStrategicLineasHelper.FileMove(model.ContentDetails[i].ContentUrlImg, folder);
+                        model.ContentDetails[i].ContentUrlImg = _folderStrategicLineasHelper.FileMove(model.ContentDetails[i].ContentUrlImg, folder);
                     }
                     else
                     {
@@ -546,7 +546,6 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
         }
 
-
         [HttpPost]
         public async Task<IActionResult> UploadeTemp(IFormFile file)
         {
@@ -568,12 +567,17 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             file2 = Path.Combine(_env.WebRootPath, folder, file2);
 
-            FileInfo fi = new FileInfo(file2);
-            if (fi != null)
+            if (System.IO.File.Exists(file2))
             {
-                System.IO.File.Delete(file2);
-                fi.Delete();
+                FileInfo fi = new FileInfo(file2);
+
+                if (fi != null)
+                {
+                    System.IO.File.Delete(file2);
+                    fi.Delete();
+                }
             }
+
 
             return Json(new { path = "Ok" });
         }

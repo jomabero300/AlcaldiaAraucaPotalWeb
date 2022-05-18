@@ -9,7 +9,6 @@ C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\bin\D
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\bin\Debug\net5.0\AlcaldiaAraucaPortalReport.dll
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\bin\Debug\net5.0\ref\AlcaldiaAraucaPortalReport.dll
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\bin\Debug\net5.0\AlcaldiaAraucaPortalReport.pdb
-C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\obj\Debug\net5.0\AlcaldiaAraucaPortalReport.csproj.AssemblyReference.cache
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\obj\Debug\net5.0\AlcaldiaAraucaPortalReport.GeneratedMSBuildEditorConfig.editorconfig
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\obj\Debug\net5.0\AlcaldiaAraucaPortalReport.AssemblyInfoInputs.cache
 C:\Mbel\DanielCorregida\AlcaldiaAraucaPortalWeb\AlcaldiaAraucaPortalReport\obj\Debug\net5.0\AlcaldiaAraucaPortalReport.AssemblyInfo.cs

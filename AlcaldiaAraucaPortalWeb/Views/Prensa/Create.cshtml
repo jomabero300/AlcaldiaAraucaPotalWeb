@@ -67,6 +67,10 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
+                <label id="optionFile" hidden></label>
+                <label id="contentDetailsId" hidden></label>
+                <label id="contentDate" hidden></label>
+
                 <label asp-for="ContentDetails.FirstOrDefault().ContentTitle" class="control-label"></label>
                 <input id="contentTitle" class="form-control" maxlength="40" />
                 <span id="spanContentTitle" class="text-danger"></span>
@@ -83,7 +87,8 @@
             <div class="form-group">
                 <div class="form-group">
                     <select id="OptionFile" class="form-control">
-                        <option value="" disabled selected hidden>Seleccione..</option>
+                        @*<option value="" disabled selected hidden>Seleccione..</option>*@
+                        <option value="" >Seleccione..</option>
                         <option value="1">Archivo</option>
                         <option value="2">Video</option>
                     </select>

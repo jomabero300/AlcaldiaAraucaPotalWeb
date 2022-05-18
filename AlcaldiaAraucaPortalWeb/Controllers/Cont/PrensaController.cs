@@ -3,10 +3,12 @@ using AlcaldiaAraucaPortalWeb.Data.Entities.Cont;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Data.Entities.Susc;
 using AlcaldiaAraucaPortalWeb.Helper;
+using AlcaldiaAraucaPortalWeb.Helper.Entities.Cont;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Gene;
 using AlcaldiaAraucaPortalWeb.Helper.Entities.Susc;
 using AlcaldiaAraucaPortalWeb.Models.ModelsViewCont;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,8 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
         private readonly IStateHelper _stateHelper;
         private readonly ISubscriberSectorHelper _subscriberSectorHelper;
         private readonly IPqrsUserStrategicLineHelper _userStrategicLineHelper;
+        private readonly IContentHelper _contentHelper;
+
 
 
         public PrensaController(ApplicationDbContext context,
@@ -38,7 +42,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             IImageHelper imageHelper,
             IStateHelper stateHelper,
             ISubscriberSectorHelper subscriberSectorHelper,
-            IPqrsUserStrategicLineHelper userStrategicLineHelper)
+            IPqrsUserStrategicLineHelper userStrategicLineHelper, IContentHelper contentHelper)
         {
             _context=context;
             _strategicLineHelper=strategicLineHelper;
@@ -48,6 +52,7 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
             _stateHelper=stateHelper;
             _subscriberSectorHelper=subscriberSectorHelper;
             _userStrategicLineHelper=userStrategicLineHelper;
+            _contentHelper=contentHelper;
         }
 
         public IActionResult IndexPrueba()
@@ -360,6 +365,113 @@ namespace AlcaldiaAraucaPortalWeb.Controllers.Cont
 
             return View(content);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDetails(int id)
+        {
+
+            try
+            {
+                ContentDetail model = await _contentHelper.DetailsIdAsync(id);
+
+                Content content = await _contentHelper.ByIdAsync(model.ContentId);
+
+                var response = await _contentHelper.DeleteDetailsAsync(id);
+
+                //TODO: Eliminar las imagenes
+                if (response.Succeeded)
+                {
+                    PqrsStrategicLineSector pqrsStrategicLine = await _strategicLineSectorHelper.ByIdAsync(content.PqrsStrategicLineSectorId);
+
+                    string folder = await _folderStrategicLineasHelper.FolderPath(pqrsStrategicLine.PqrsStrategicLineId, content.PqrsStrategicLineSectorId);
+
+                    string responsE = await _imageHelper.DeleteImageAsync(model.ContentUrlImg, folder);
+                }
+
+                return Json(new { status = true });
+            }
+            catch (System.Exception ex)
+            {
+                string ltmensaje = string.Empty;
+                if (ex.InnerException.Message.Contains("IX_"))
+                {
+                    ltmensaje = "El registro ya existe..";
+                }
+                else if (ex.InnerException.Message.Contains("REFERENCE"))
+                {
+                    ltmensaje = "El registro no se puede eliminar porque tiene registros relacionados";
+                }
+                else
+                {
+                    ltmensaje = ex.Message;
+                }
+
+                return Json(new { status = false, message = ltmensaje });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddContentDetalle(int id, string Title, string ContentText, IFormFile file, string fileUrl)
+        {
+            //TODO: Agregar las imagenes
+            Content lineaSector = await _contentHelper.ByIdAsync(id);
+            string response = string.Empty;
+            response = fileUrl;
+
+            if (Title.Contains("http"))
+            {
+                Title = FilesHelper.ConvertToTextInLik(Title);
+            }
+            if (ContentText.Contains("http"))
+            {
+                ContentText = FilesHelper.ConvertToTextInLik(ContentText);
+            }
+
+            if (file!=null)
+            {
+                PqrsStrategicLineSector pqrsStrategicLine = await _strategicLineSectorHelper.ByIdAsync(lineaSector.PqrsStrategicLineSectorId);
+
+                string folder = await _folderStrategicLineasHelper.FolderPath(pqrsStrategicLine.PqrsStrategicLineId, lineaSector.PqrsStrategicLineSectorId);
+
+                //string folder = await _folderStrategicLineasHelper.FolderPath(lineaSector.PqrsStrategicLineSectorId, User.Identity.Name);
+                response = await _imageHelper.UploadImageAsync(file, folder);
+            }
+
+            var detalle = new ContentDetail
+            {
+                ContentId = id,
+                ContentTitle = Title,
+                ContentText = ContentText,
+                ContentUrlImg = response,
+                ContentDate = DateTime.Now,
+                StateId = 1
+            };
+
+            try
+            {
+                _context.ContentDetails.Add(detalle);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException.Message.Contains("duplicate"))
+                {
+                    ModelState.AddModelError(string.Empty, "Ya existe este registro");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return Json(new { status = true });
+        }
+
 
         public async Task<JsonResult> getSector(int Id)
         {

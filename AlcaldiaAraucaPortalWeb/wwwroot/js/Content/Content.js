@@ -2,39 +2,54 @@
 let numD = 0;
 let activeId = 0;
 
-
 function AddContentDetalle() {
 
     if (ContentDetalleValidate()) {
+
         if ($("#OptionFile").val() == "1") {
 
-            let formData = new FormData();
+            if (typeof $("#contentUrlImg")[0].files[0] != "undefined") {
+                let formData = new FormData();
 
-            formData.append("file", $("#contentUrlImg")[0].files[0]);
+                formData.append("file", $("#contentUrlImg")[0].files[0]);
 
-            $.ajax({
-                type: "POST",
-                url: urlServidor + "Contents/UploadeTemp",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    if ($("#btnAddContentDetalle").text() == "Agregar") {
-                        ContentDetailBuildTableRow(numD, data.path);
-                        numD++;
-                    } else {
-                        ContentDetailUpdateInTable(activeId, data.path);
+                $.ajax({
+                    type: "POST",
+                    url: urlServidor + "Contents/UploadeTemp",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if ($("#btnAddContentDetalle").text() == "Agregar") {
+                            ContentDetailBuildTableRow(numD, data.path);
+                            numD++;
+                        } else {
+                            ContentDetailUpdateInTable(activeId, data.path);
+                        }
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve.' + ex);
                     }
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve.' + ex);
+                });
+            } else {
+                if ($("#btnAddContentDetalle").text() == "Agregar") {
+                    ContentDetailBuildTableRow(numD, $("#optionFile").text());
+                    numD++;
+                } else {
+                    ContentDetailUpdateInTable(activeId, $("#optionFile").text());
                 }
-            });
+            }
+
         } else {
-            let URL = $("#contentUrlImg").val().trim();
-            console.log($("#optionFile").text());
-            let imgPath = URL == "" ? $("#optionFile").text() : URL;
-            console.log(imgPath);
+            let imgPath = $("#optionFile").text();
+
+            if ($("#OptionFile").val() == "2") {
+                let URL = $("#contentUrlImg").val().trim();
+            
+                imgPath = URL == "" ? $("#optionFile").text() : URL;
+
+            }
+
             if ($("#btnAddContentDetalle").text() == "Agregar") {
                 ContentDetailBuildTableRow(numD, imgPath);
                 numD++;
@@ -109,8 +124,13 @@ function ContentDetalleValidate() {
 
         isValid = false;
     }
+
     if ($("#btnAddContentDetalle").text() == "Agregar") {
-        if ($("#OptionFile").val() == null) {
+        if ($("#OptionFile").val() == "") {
+            $('#spanOptionFile').text('!Debe seleccionar una opcion¡').show();
+            $("#OptionFile").focus();
+        }
+        else if ($("#OptionFile").val() == null) {
             $('#spanOptionFile').text('!El campo es requerido¡').show();
 
             if (isValid) {
@@ -128,19 +148,20 @@ function ContentDetalleValidate() {
 
             isValid = false;
         }
-    }
+    } 
 
 
     return isValid;
 }
 
 function AddContentEditDetalle(ContentId, isEsta) {
+
     $("body").css("cursor", "wait");
 
     if (ContentEditDetalleValidate()) {
 
         let formData = new FormData();
-
+        
         if ($("#contentDetailsId").text() == "") {
 
             formData.append("id", ContentId);
@@ -157,10 +178,9 @@ function AddContentEditDetalle(ContentId, isEsta) {
 
             let ctr = isEsta == '0' ? "Contents" : "Prensa";
 
-
             $.ajax({
                 type: "POST",
-                url: urlServidor + "Contents/AddContentDetalle ",
+                url: urlServidor + ctr+ "/AddContentDetalle ",
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -214,16 +234,22 @@ function AddContentEditDetalle(ContentId, isEsta) {
         }
     }
 }
-function ContentEditDetailDelete(ContentDetailsId, ContentId) {
+function ContentEditDetailDelete(ContentDetailsId, ContentId, isEsta) {
+    let ctl = isEsta == "0" ? "Contents" : "Prensa"
+    let urlDelete = urlServidor + ctl + "/DeleteDetails";
+
     $.ajax({
         type: "POST",
-        url: urlServidor + "Contents/DeleteDetails",
+        url: urlDelete,
         data: { id: ContentDetailsId },
         success: function (response) {
 
             if (response.status == true) {
-                window.location.href = "/Contents/Edit/?id=" + ContentId
+                window.location.href = "/"+ ctl +"/Edit/?id=" + ContentId
             }
+        },
+        error: function (ex) {
+            alert('Failed to retrieve cities.' + response.message);
         }
     });
 }
@@ -255,6 +281,7 @@ function ContentEditDetalleValidate() {
 
         isValid = false;
     }
+
     if ($("#contentDetailsId").text() == "") {
         if ($("#OptionFile").val() == null) {
             $('#spanOptionFile').text('!El campo es requerido¡').show();
@@ -279,7 +306,6 @@ function ContentEditDetalleValidate() {
     return isValid;
 }
 
-
 function ContentDetailEdit(ctl) {
 
     let _row = $(ctl).parents("tr");
@@ -296,9 +322,11 @@ function ContentDetailEdit(ctl) {
 
     $("#optionFile").text($(cols[3]).text());
 
-    console.log($(cols[3]).text());
+    //console.log($(cols[3]).text());
 
     $("#contentDetailsId").text($(cols[4]).text());
+
+    console.log($("#contentDetailsId").text());
 
     $("#contentDate").text($(cols[5]).text());
 
@@ -334,11 +362,18 @@ function MyTable(id, fileExten, img) {
     return ret;
 }
 function DivTable(id, fileExten) {
+    let isEsta = 0;
+
+    if (fileExten.includes(".png") || fileExten.includes(".pdf")) {
+        isEsta = 1;
+    }
+
     let ret = "<input type='hidden' name='ContentDetails.Index' value=" + id + " /> " +
         "<input id=ContentTitle" + id +" type='hidden' name='ContentDetails[" + id + "].ContentTitle' value='" + $("#contentTitle").val() + "'/> " +
         "<input id=ContentText" + id +" type='hidden' name='ContentDetails[" + id + "].ContentText' value='" + $("#contentText").val() + "'/> " +
         "<input id=ContentUrlImg" + id +" type='hidden' name='ContentDetails[" + id + "].ContentUrlImg' value='" + fileExten + "'/> " +
-        "<input id=isEsta" + id +" type='hidden' name='ContentDetails[" + id + "].isEsta' value='0'/> ";
+        "<input id=isEsta" + id + " type='hidden' name='ContentDetails[" + id + "].isEsta' value='" + isEsta +"'/> ";
+
     return ret;
 }
 function fImg(fileExten) {
@@ -388,8 +423,9 @@ function formClear() {
     $("#contentTitle").val("");
     $("#contentText").val("");
     $("#contentUrlImg").val("");
+    $("#dynamicCtr").empty();
+    $("#OptionFile").val("");
 }
-
 
 $(document).ready(function () {
 
@@ -398,7 +434,7 @@ $(document).ready(function () {
         if ($("#OptionFile").val() == "1") {
             $("#dynamicCtr").append("<div class='form-group' id='inputFile'><input id='contentUrlImg' class='form-control' type='file' accept='application/pdf, image/gif, image/jpeg, image/png'/><span id='spanContentUrlImg' class='text-danger'></span></div>");
         }
-        else if ($("#OptionFile").val() == "2"){
+        else if ($("#OptionFile").val() == "2") {
             $("#dynamicCtr").append("<input id='contentUrlImg' class='form-control' maxlength='150' placeholder='Digite una url'/><span id='spanContentUrlImg' class='text-danger'></span>");
         }
     });
