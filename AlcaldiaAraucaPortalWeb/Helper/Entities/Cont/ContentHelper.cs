@@ -66,7 +66,7 @@ namespace AlcaldiaAraucaPortalWeb.Helper.Entities.Cont
         {
             var model = await _context.ContentDetails
                                       .Where(c => c.ContentId == contentId)
-                                      .OrderByDescending(c=>c.ContentDate)
+                                      .OrderBy(c=>c.ContentDetailsId)
                                       .ToListAsync();
             return model;
 
